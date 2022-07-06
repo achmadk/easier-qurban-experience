@@ -1,0 +1,21 @@
+.footer {
+  & > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  span {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.25rem;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+
+    & > a {
+        text-decoration: underline;
+    }
+  }
+}
