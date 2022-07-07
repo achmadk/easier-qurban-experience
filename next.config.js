@@ -1,18 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { resolve } = require('path')
 
 const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 const optimizedImages = require('next-optimized-images')
-// const withLinaria = require('next-linaria')
 const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
-console.log(process.env.NEXT_EXPORT_COMMAND, typeof process.env.NEXT_EXPORT_COMMAND)
-
 const isProduction = process.env.NODE_ENV === 'production'
 const isNextExportCommand = process.env.NEXT_EXPORT_COMMAND === 'true'
-
-console.log(isNextExportCommand)
 
 const nextConfigurations = {
   images: {
