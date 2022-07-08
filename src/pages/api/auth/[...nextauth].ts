@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import { PrismaClient } from '@prisma/client'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
@@ -22,14 +23,16 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account }) {
-      if (account) {
+      if (account?.access_token) {
         token.accessToken = account.access_token
       }
       return token
     },
     async session({ session, token }) {
       // Send properties to the client, like an access_token from a provider.
-      session.accessToken = token.accessToken
+      session.accessToken = token.accessToken;
+      (session.user as any).tag = session.user.name?.split(' ').join('').toLocaleLowerCase() ?? '';
+      (session.user as any).uid = token.sub
       return session
     }
   }
