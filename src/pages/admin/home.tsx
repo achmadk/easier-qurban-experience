@@ -1,8 +1,8 @@
-import { useSession } from "next-auth/react"
+import { useUser } from '@clerk/nextjs'
 
 export default function AdminHome() {
-  const { data } = useSession()
+  const { user } = useUser()
   return (
-    <h1>{`Welcome ${data?.user?.name ?? '-'}`}</h1>
+    <h1>{`Welcome ${user?.fullName ?? '-'}`}</h1>
   )
 }
