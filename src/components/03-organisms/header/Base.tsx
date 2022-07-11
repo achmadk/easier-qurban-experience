@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, MouseEvent } from 'react'
+import { signIn } from 'next-auth/react'
 
 import Image from 'next/image'
 
@@ -15,6 +16,11 @@ const HeaderBase = ({ innerRef }: PropsWithInnerRef) => {
     ],
     []
   )
+
+  const handleLoginButtonClicked = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    signIn()
+  }
 
   const toggleHamburgerMenu = useCallback(() => {
     setHamburgerMenuOpened((prevState) => !prevState)
@@ -58,6 +64,7 @@ const HeaderBase = ({ innerRef }: PropsWithInnerRef) => {
             <a
               href="/api/auth/signin"
               className="py-3 px-6 rounded-md shadow-md text-white text-center bg-blue-600 focus:shadow-none block md:inline"
+              onClick={handleLoginButtonClicked}
             >
               Sign In
             </a>
