@@ -20,6 +20,10 @@ export function getControllerMosqueAdminFindHandleAPIRouteServer<
       const { query } = req.query as { query: string }
       const user = await transformRequestBody(query)
       const savedUserData = await prisma.user.findFirst({ where: user })
+
+      if (!savedUserData?.id) {
+        return res.status(200).json({ data: [] })
+      }
       const savedMosqueUserData = await prisma.mosqueUser.findMany({
         where: { userId: savedUserData.id },
         include: { mosque: true }
