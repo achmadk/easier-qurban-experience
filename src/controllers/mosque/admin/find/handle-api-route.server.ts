@@ -30,8 +30,7 @@ export function getControllerMosqueAdminFindHandleAPIRouteServer<
       })
       const data = savedMosqueUserData.map((item) => item.mosque)
       res.status(200).json({ data })
-    } catch (error) {
-      console.log(error)
+    } catch {
       res.status(500).send('Error Find Mosque from specified query')
     } finally {
       prisma.$disconnect()

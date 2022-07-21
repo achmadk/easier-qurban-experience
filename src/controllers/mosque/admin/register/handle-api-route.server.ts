@@ -38,7 +38,7 @@ export function getControllerMosqueAdminRegisterHandleAPIRouteServer<
           roleId: adminRole.id
         }
       })
-      res.status(200).send('Mosque registered successfully')
+      res.status(200).json({ data: newMosqueData })
     } catch {
       res.status(500).send('Error Register Mosque')
     } finally {

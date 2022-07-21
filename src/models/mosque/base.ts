@@ -11,3 +11,7 @@ export type IMosqueWithUser<
 > = MosqueType & {
   user: UserType
 }
+
+export interface IMosqueWithID extends IMosqueBase {
+  id: string
+}

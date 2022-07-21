@@ -22,8 +22,7 @@ export async function encryptMessage<
   try {
     const secretKey = await getSecretKey()
     return await new SignJWT(input).setProtectedHeader({ alg: 'HS256' }).sign(secretKey)
-  } catch (error) {
-    console.log(error)
+  } catch {
     return null
   }
 }
