@@ -1,15 +1,14 @@
 import { decryptMessage } from 'services';
 
 import { IControllerCoreTransformRequestBody } from "controllers/core";
-import { IUserBase } from "models";
+import { DefaultMosqueFindTransformRequestBodyClient } from './client.hooks';
 
 export function getControllerMosqueAdminFindTransformRequestBodyServer<
-  UserType extends IUserBase = IUserBase
->(): IControllerCoreTransformRequestBody<string, Promise<UserType | null>> {
-  const transformRequestBody = async (input: string): Promise<UserType | null> => {
+  OutputType extends DefaultMosqueFindTransformRequestBodyClient = DefaultMosqueFindTransformRequestBodyClient
+>(): IControllerCoreTransformRequestBody<string, Promise<OutputType | null>> {
+  const transformRequestBody = async (input: string): Promise<OutputType | null> => {
     try {
-      const { user } = await decryptMessage<{ user: UserType }>(input)
-      return user
+      return await decryptMessage<OutputType>(input)
     } catch {
       return null
     }

@@ -7,6 +7,8 @@ import { ToastContainer } from 'react-toastify'
 
 import { bindDependencyInjectionMethods } from 'dependency-injection'
 
+import { wrapper } from 'state-management/store'
+
 import 'windi.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import './_app.css'
@@ -48,4 +50,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

@@ -1,15 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from '@prisma/client';
 
-import { IControllerCoreHandleAPIRoute } from "controllers";
-import { IUserBase } from "models";
+import { DefaultMosqueFindTransformRequestBodyClient, IControllerCoreHandleAPIRoute } from "controllers";
 import { getControllerMosqueAdminFindTransformRequestBodyServer } from './transform-request-body/server.hooks';
 
 export const CONTROLLER_MOSQUE_ADMIN_FIND_HANDLE_API_ROUTE_SERVER =
   'ControllerMosqueAdminFindHandleAPIRouteServer'
 
 export function getControllerMosqueAdminFindHandleAPIRouteServer<
-  BodyType extends IUserBase = IUserBase
+  BodyType extends DefaultMosqueFindTransformRequestBodyClient = DefaultMosqueFindTransformRequestBodyClient
 >(): IControllerCoreHandleAPIRoute {
     
   const handleAPIRoute = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -18,7 +17,7 @@ export function getControllerMosqueAdminFindHandleAPIRouteServer<
     const prisma = new PrismaClient()
     try {
       const { query } = req.query as { query: string }
-      const user = await transformRequestBody(query)
+      const { user, mosqueId } = await transformRequestBody(query)
       const savedUserData = await prisma.user.findFirst({ where: user })
 
       if (!savedUserData?.id) {
@@ -28,7 +27,10 @@ export function getControllerMosqueAdminFindHandleAPIRouteServer<
         where: { userId: savedUserData.id },
         include: { mosque: true }
       })
-      const data = savedMosqueUserData.map((item) => item.mosque)
+      let data = savedMosqueUserData.map((item) => item.mosque)
+      if (mosqueId) {
+        data = [data?.find((item) => item.id === mosqueId)] ?? []
+      }
       res.status(200).json({ data })
     } catch {
       res.status(500).send('Error Find Mosque from specified query')

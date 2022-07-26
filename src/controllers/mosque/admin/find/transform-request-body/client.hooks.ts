@@ -8,20 +8,26 @@ import { JWTWorkerType } from "services";
 export const CONTROLLER_MOSQUE_FIND_TRANSFORM_REQUEST_BODY_CLIENT =
   'ControllerMosqueFindTransformRequestBodyClient'
 
+
+export interface DefaultMosqueAdminFindTransformRequestBodyClientOptions {
+  mosqueId?: string | null
+}
+
 export interface DefaultMosqueFindTransformRequestBodyClient<
   UserType extends IUserBase = IUserBase
-> {
+> extends DefaultMosqueAdminFindTransformRequestBodyClientOptions {
   user: UserType
   timestamp: number
 }
-
 export function useControllerMosqueFindTransformRequestBodyClient<
+  OptionsType extends DefaultMosqueAdminFindTransformRequestBodyClientOptions = DefaultMosqueAdminFindTransformRequestBodyClientOptions,
   InputType extends IUserBase = IUserBase,
   TransformedInputType extends DefaultMosqueFindTransformRequestBodyClient<InputType> = DefaultMosqueFindTransformRequestBodyClient<InputType>
->(): IControllerCoreTransformRequestBody<null | undefined, Promise<string>> {
+>(): IControllerCoreTransformRequestBody<OptionsType | null | undefined, Promise<string>> {
   const { user: clerkUser } = useUser()
   
-  const transformRequestBody = async () => {
+  const transformRequestBody = async (options?: OptionsType) => {
+    const mosqueId = options?.mosqueId ?? null
     const worker = new Worker(
       new URL('../../../../../services/core/jwt/worker.client.ts', import.meta.url),
       { name: 'jwt-worker-client' }
@@ -33,6 +39,7 @@ export function useControllerMosqueFindTransformRequestBodyClient<
             name: clerkUser.fullName,
             email: clerkUser?.primaryEmailAddress?.emailAddress ?? '',
         },
+        ...(mosqueId ? { mosqueId } : {}),
         timestamp: Date.now()
       } as TransformedInputType
       return await api.encryptMessage(input)

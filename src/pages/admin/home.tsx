@@ -3,8 +3,10 @@ import { useUser } from '@clerk/nextjs'
 import { container } from 'inversify-hooks-esm'
 import { usePopper } from 'react-popper'
 import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
 
 import Link from 'next/link'
+import { ComponentOrganismFormMosqueRegistration } from 'components/03-organisms/forms/mosque/registration/Base'
 
 import {
   // CONTROLLER_MOSQUE_ADMIN_REGISTER_HANDLE_SUBMIT_CLIENT,
@@ -14,12 +16,15 @@ import {
   useControllerMosqueAdminFindCheckValidConditionIsEmpty,
   useControllerMosqueAdminFindGetResourceDataClient
 } from 'controllers'
+
+import { setMosqueData } from 'state-management/slices'
+
 import { IMosqueWithID } from 'models'
-import { ComponentOrganismFormMosqueRegistration } from 'components/03-organisms/forms/mosque/registration/Base'
 
 export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithID>() {
   const { user } = useUser()
   const router = useRouter()
+  const dispatch = useDispatch()
   const logoutCtrl = useMemo(() =>
     container.get<IControllerCoreLogout>(
       CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
@@ -65,6 +70,10 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
     router.push(`/admin/mosques/${input.id}`)
   }
 
+  const handleMosqueCardClicked = (item: InputType) => () => {
+    dispatch(setMosqueData(item))
+  }
+
   useEffect(() => {
     getMosqueData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,8 +88,6 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMosqueDataEmpty])
-
-  console.log(mosqueData)
 
   return (
     <>
@@ -187,24 +194,24 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
           <div className="flex flex-wrap">
             {mosqueData.map((item, index) => {
               return (
-                <Link key={`mosque-item-${index}`} href={`/admin/mosques/${item.id}`}>
-                  <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center cursor-pointer">
-                  <div
-                    className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
-                  >
-                    <div className="px-4 py-5 flex-auto">
-                      <div
-                        className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-600"
-                      >
-                        <i className="fas fa-award"></i>
+                <Link
+                  key={`mosque-item-${index}`}
+                  href={`/admin/mosques/${item.id}`}>
+                  <a className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center cursor-pointer" onClick={handleMosqueCardClicked(item)}>
+                    <div
+                      className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                      <div className="px-4 py-5 flex-auto">
+                        <div
+                          className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-600">
+                          <i className="fas fa-award" />
+                        </div>
+                        <h6 className="text-xl font-semibold">{item.name}</h6>
+                        <p className="mt-2 mb-4 text-blueGray-500">
+                          {item?.address ?? 'No address'}
+                        </p>
                       </div>
-                      <h6 className="text-xl font-semibold">{item.name}</h6>
-                      <p className="mt-2 mb-4 text-blueGray-500">
-                        {item?.address ?? 'No address'}
-                      </p>
                     </div>
-                  </div>
-                </div>
+                  </a>
                 </Link>
               )
             })}
