@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve } = require('path')
+const { resolve, join } = require('path')
+const glob = require('glob')
 
 const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 const optimizedImages = require('next-optimized-images')
 const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const PurgeFontawesomePlugin = require('purge-fontawesome/webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 const isNextExportCommand = process.env.NEXT_EXPORT_COMMAND === 'true'
@@ -36,6 +38,13 @@ const nextConfigurations = {
           test: /\.(js|css|html|svg)$/
         })
       )
+      config.plugins.push(
+        new PurgeFontawesomePlugin({
+          paths: [
+            glob.sync(join(__dirname, 'src/**/*'), { nodir: true })
+          ]
+        })
+      )
     }
     return config
   },
@@ -44,7 +53,8 @@ const nextConfigurations = {
       ignoreDuringBuilds: true,
     },
     pwa: {
-      dest: 'public'
+      dest: 'public',
+      maximumFileSizeToCacheInBytes: 8 * 1024 * 1024
     },
     swcMinify: true,
   } : {})

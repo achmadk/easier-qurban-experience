@@ -11,6 +11,7 @@ import { wrapper } from 'state-management/store'
 
 import 'windi.css'
 import 'react-toastify/dist/ReactToastify.min.css'
+import 'utils/integration/third-parties/font-awesome'
 import './_app.css'
 
 const publicRoutes = [
