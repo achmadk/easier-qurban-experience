@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { GetStaticProps, GetStaticPaths } from 'next'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
 import { HeaderMosque } from 'components/03-organisms/header/mosque/Base'
@@ -21,6 +21,7 @@ export interface AdminMosqueIDProps extends IRouteCoreMosqueBase {}
 export default function AdminMosqueID<
   PropType extends AdminMosqueIDProps = AdminMosqueIDProps
 >(props: PropType) {
+  const [triggerLoadData, setTriggerLoadData] = useState(false)
   const { checkValidCondition: checkParamsIsReady } =
     useControllerCoreRouterIsParamsReady<PropType>()
   
@@ -33,10 +34,18 @@ export default function AdminMosqueID<
 
   useEffect(() => {
     if (props?.mosqueId) {
+      setTriggerLoadData(true)
+    }
+  }, [props?.mosqueId])
+  
+  useEffect(() => {
+    if (triggerLoadData) {
       getMosqueData({ mosqueId: props.mosqueId })
       getCitizenData(props.mosqueId)
+      setTriggerLoadData(false)
     }
-  }, [getCitizenData, getMosqueData, props.mosqueId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [triggerLoadData])
 
   return (
     <>
