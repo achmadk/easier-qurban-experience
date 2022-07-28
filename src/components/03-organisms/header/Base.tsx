@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useState, useMemo, useCallback } from 'react'
 
-import Image from 'next/image'
+import Link from 'next/link'
 
 import { addRefProps, PropsWithInnerRef } from '../../../utils'
 
@@ -24,14 +24,11 @@ const HeaderBase = ({ innerRef }: PropsWithInnerRef) => {
     <header ref={innerRef}>
       <nav className="items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6">
         <div className="flex justify-between">
-          <a href="javascript:void(0)">
-            <Image
-              src="https://www.floatui.com/logo.svg"
-              width={120}
-              height={50}
-              alt="Float UI logo"
-            />
-          </a>
+          <Link href="/">
+            <a>
+              EQExp App
+            </a>
+          </Link>
           <button className="text-gray-500 outline-none md:hidden" onClick={toggleHamburgerMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
