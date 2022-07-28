@@ -28,6 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Easier Qurban Experience (EQExp)</title>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <ToastContainer
