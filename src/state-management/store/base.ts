@@ -20,4 +20,8 @@ const makeStore = wrapMakeStore(() => configureStore({
       )
 }))
 
+export type AppStore = ReturnType<typeof makeStore>
+
+export type AppState = ReturnType<AppStore['getState']>
+
 export const wrapper = createWrapper(makeStore, {debug: isNotProduction })

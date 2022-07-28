@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 async function main() {
   const storedRoles = await prisma.role.findMany()
   if (storedRoles.length === 0) {
-    const newRoles = await prisma.role.createMany({
+    await prisma.role.createMany({
       data: [
         {
           name: 'Head of Administrator',
@@ -34,7 +34,15 @@ async function main() {
         }
       ]
     })
-    console.log(newRoles)
+  }
+  if (storedRoles.length === 5) {
+    await prisma.role.create({
+      data: {
+        name: 'Citizen',
+        code: 'CITIZEN',
+        description: 'Users which doesnt registered as Qurban committee',
+      }
+    })
   }
 }
 

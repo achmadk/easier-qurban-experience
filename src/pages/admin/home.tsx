@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { container } from 'inversify-hooks-esm'
 import { usePopper } from 'react-popper'
@@ -25,11 +25,9 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
   const { user } = useUser()
   const router = useRouter()
   const dispatch = useDispatch()
-  const logoutCtrl = useMemo(() =>
-    container.get<IControllerCoreLogout>(
-      CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
-    )
-  , [])
+  const logoutCtrl = container.get<IControllerCoreLogout>(
+    CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
+  )
   // const mosqueRegisterCtrl = useMemo(() =>
   //   container.get<IControllerCoreHandleSubmit<InputType>>(
   //     CONTROLLER_MOSQUE_ADMIN_REGISTER_HANDLE_SUBMIT_CLIENT
@@ -49,11 +47,6 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
     useControllerMosqueAdminFindCheckValidConditionIsEmpty<InputType>()
 
   const isMosqueDataEmpty = checkMosqueDataIsEmpty(mosqueData)
-
-  // const handleRegisterMosqueClicked = async () => {
-  //   const dummyInput = { name: 'Baabussalam Mosque' } as InputType
-  //   await mosqueRegisterCtrl.handleSubmit(dummyInput)
-  // }
 
   /* Function for opening/closing navbar on mobile */
   const toggleNavbar = (elementId: string) => {
@@ -107,7 +100,7 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
               type="button"
               onClick={() => toggleNavbar('collapse-navbar')}
             >
-              <i className="fas fa-bars"></i>
+              <i className="fas fa-bars" />
             </button>
           </div>
           <div
@@ -203,7 +196,7 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
                       <div className="px-4 py-5 flex-auto">
                         <div
                           className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-600">
-                          <i className="fas fa-award" />
+                          <i className="fas fa-place-of-worship" />
                         </div>
                         <h6 className="text-xl font-semibold">{item.name}</h6>
                         <p className="mt-2 mb-4 text-blueGray-500">

@@ -14,7 +14,7 @@ const isNextExportCommand = process.env.NEXT_EXPORT_COMMAND === 'true'
 
 const nextConfigurations = {
   images: {
-    domains: ['www.floatui.com'],
+    domains: ['www.floatui.com', 'images.clerk.dev'],
     ...(isNextExportCommand ? {
       loader: 'akamai',
       unoptimized: true,
