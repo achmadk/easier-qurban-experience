@@ -25,23 +25,20 @@ export function getControllerCitizenAdminCreateManyHandleAPIRouteServer<
       const savedCitizens = await prisma.$transaction(
         citizens.map((data) => prisma.user.create({ data }))
       )
-      await Promise.all([
-        prisma.userRole.createMany({
-          data: savedCitizens.map((user) => ({
-            userId: user.id,
-            roleId: citizenRole.id
-          }))
-        }),
-        prisma.mosqueUser.createMany({
-          data: savedCitizens.map((user) => ({
-            mosqueId,
-            userId: user.id
-          }))
-        })
-      ])
+      await prisma.userRole.createMany({
+        data: savedCitizens.map((user) => ({
+          userId: user.id,
+          roleId: citizenRole.id
+        }))
+      })
+      await prisma.mosqueUser.createMany({
+        data: savedCitizens.map((user) => ({
+          mosqueId,
+          userId: user.id
+        }))
+      })
       res.status(200).json({ data: savedCitizens })
-    } catch (error) {
-      console.log(error)
+    } catch {
       res.status(500).send('Error Create Many Citizens')
     } finally {
       prisma.$disconnect()
