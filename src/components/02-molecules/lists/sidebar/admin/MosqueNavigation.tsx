@@ -17,7 +17,7 @@ const ListSidebarAdminMosqueNavigationBase = <
   const router = useRouter()
   const mosqueId = useSelector(getMosqueID)
 
-  const linkClassName = (pathname: string) => clsx('text-xs uppercase py-3 font-bold block', {
+  const linkClassName = (pathname: string) => clsx('text-xs uppercase py-3 font-bold flex', {
     'text-blue-600 hover:text-blue-700': router.pathname === pathname,
     'text-blueGray-700 hover:text-blueGray-500': router.pathname !== pathname
   })
@@ -35,7 +35,7 @@ const ListSidebarAdminMosqueNavigationBase = <
             <Link href={`/admin/mosques/${mosqueId}`}>
               <a
                 className={linkClassName(`/admin/mosques/[mosqueId]`)}>
-                <i className="fas fa-tachograph-digital text-blueGray-300 mr-2 text-sm" />
+                <i className="fas fa-tachograph-digital text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
                 Dashboard
               </a>
             </Link>
@@ -44,7 +44,7 @@ const ListSidebarAdminMosqueNavigationBase = <
             <Link href={`/admin/mosques/${mosqueId}/events`}>
               <a
                 className={linkClassName(`/admin/mosques/[mosqueId]/events`)}>
-                <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" />
+                <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
                 Qurban Events
               </a>
             </Link>
@@ -53,7 +53,7 @@ const ListSidebarAdminMosqueNavigationBase = <
             <Link href={`/admin/mosques/${mosqueId}/citizens`}>
               <a
                 className={linkClassName(`/admin/mosques/[mosqueId]/citizens`)}>
-                <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" />
+                <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
                 Citizens
               </a>
             </Link>
@@ -62,7 +62,7 @@ const ListSidebarAdminMosqueNavigationBase = <
             <Link href={`/admin/mosques/${mosqueId}/profile`}>
               <a
                 className={linkClassName(`/admin/mosques/[mosqueId]/profile`)}>
-                <i className="fas fa-place-of-worship text-blueGray-300 mr-2 text-sm" />
+                <i className="fas fa-place-of-worship text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
                 Mosque Profile
               </a>
             </Link>
