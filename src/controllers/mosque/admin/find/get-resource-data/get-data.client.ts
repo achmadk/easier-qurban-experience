@@ -21,6 +21,7 @@ export function useControllerMosqueAdminFindGetDataClient<
 >(): IControllerCoreGetResourceDataOnlyFunction<OptionsType | null | undefined, Promise<DataType[]>> {
   const dispatch = useDispatch()
   const isMosqueDataEmpty = useSelector(checkMosqueDataEmpty)
+
   const { transformRequestBody } = useControllerMosqueFindTransformRequestBodyClient()
   const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
 

@@ -10,7 +10,12 @@ import { ListSidebarAdminMosqueNavigation } from 'components/02-molecules/lists/
 import { FooterAdmin } from 'components/03-organisms/footer/Admin'
 import { TableAdminCitizens } from 'components/03-organisms/tables/admin/citizens/Base'
 
-import { useControllerCitizenAdminFindGetResourceDataClient, useControllerCoreRouterIsParamsReady, useControllerMosqueAdminFindGetDataClient } from 'controllers'
+import {
+  useControllerCitizenAdminFindGetResourceDataClient,
+  useControllerCoreRouterIsParamsReady,
+  useControllerMosqueAdminFindGetDataClient,
+  useControllerQurbanEventAdminFindGetResourceDataClient
+} from 'controllers'
 
 import { IRouteCoreMosqueBase } from 'routes'
 import { TableAdminQurbanEvent } from 'components/03-organisms/tables/admin/qurban-events/Base'
@@ -29,6 +34,8 @@ export default function AdminMosqueID<
     useControllerCitizenAdminFindGetResourceDataClient()
   const { getData: getMosqueData } =
     useControllerMosqueAdminFindGetDataClient()
+  const { data: qurbanEventsData, getData: getQurbanEventsData } =
+    useControllerQurbanEventAdminFindGetResourceDataClient()
 
   const paramsIsReady = checkParamsIsReady(props)
 
@@ -42,6 +49,7 @@ export default function AdminMosqueID<
     if (triggerLoadData) {
       getMosqueData({ mosqueId: props.mosqueId })
       getCitizenData(props.mosqueId)
+      getQurbanEventsData({ mosqueId: props.mosqueId })
       setTriggerLoadData(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,7 +110,7 @@ export default function AdminMosqueID<
                                 Qurban Events
                               </h5>
                               <span className="font-semibold text-xl text-blueGray-700">
-                                1
+                                {qurbanEventsData?.length ?? 0}
                               </span>
                             </div>
                             <div className="relative w-auto pl-4 flex-initial">
@@ -122,7 +130,7 @@ export default function AdminMosqueID<
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <div className="flex flex-wrap mt-4">
                 <TableAdminCitizens data={citizenData} />
-                <TableAdminQurbanEvent />
+                <TableAdminQurbanEvent data={qurbanEventsData} />
               </div>
               <FooterAdmin />
             </div>

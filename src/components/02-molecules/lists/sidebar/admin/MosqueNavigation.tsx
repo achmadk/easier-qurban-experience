@@ -32,41 +32,44 @@ const ListSidebarAdminMosqueNavigationBase = <
         ref={innerRef}
         className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li className="items-center">
-            <Link href={`/admin/mosques/${mosqueId}`}>
-              <a
-                className={linkClassName(`/admin/mosques/[mosqueId]`)}>
-                <i className="fas fa-tachograph-digital text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-                Dashboard
-              </a>
-            </Link>
+          <Link href={`/admin/mosques/${mosqueId}`}>
+            <a
+              className={linkClassName(`/admin/mosques/[mosqueId]`)}>
+              <i className="fas fa-tachograph-digital text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              Dashboard
+            </a>
+          </Link>
         </li>
         <li className="items-center">
-            <Link href={`/admin/mosques/${mosqueId}/events`}>
-              <a
-                className={linkClassName(`/admin/mosques/[mosqueId]/events`)}>
-                <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-                Qurban Events
-              </a>
-            </Link>
+          <Link href={`/admin/mosques/${mosqueId}/events`}>
+            <a
+              className={linkClassName(`/admin/mosques/[mosqueId]/events`)}>
+              <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              Qurban Events
+            </a>
+          </Link>
         </li>
         <li className="items-center">
-            <Link href={`/admin/mosques/${mosqueId}/citizens`}>
-              <a
-                className={linkClassName(`/admin/mosques/[mosqueId]/citizens`)}>
-                <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-                Citizens
-              </a>
-            </Link>
+          <Link href={`/admin/mosques/${mosqueId}/citizens`}>
+            <a
+              className={linkClassName(`/admin/mosques/[mosqueId]/citizens`)}>
+              <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              Citizens
+            </a>
+          </Link>
         </li>
-        <li className="items-center">
-            <Link href={`/admin/mosques/${mosqueId}/profile`}>
-              <a
-                className={linkClassName(`/admin/mosques/[mosqueId]/profile`)}>
-                <i className="fas fa-place-of-worship text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-                Mosque Profile
-              </a>
-            </Link>
-        </li>
+        {/**
+         * @todo add mosque profile feature
+         */}
+        {/* <li className="items-center">
+          <Link href={`/admin/mosques/${mosqueId}/profile`}>
+            <a
+              className={linkClassName(`/admin/mosques/[mosqueId]/profile`)}>
+              <i className="fas fa-place-of-worship text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              Mosque Profile
+            </a>
+          </Link>
+        </li> */}
 
       </ul>
     </>

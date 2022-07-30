@@ -11,17 +11,18 @@ datasource db {
 }
 
 model Role {
-  id          String    @id @default(uuid())
-  name        String
-  code        String    @db.Text
-  description String?
+  id                    String                  @id @default(uuid())
+  name                  String
+  code                  String                  @db.Text
+  description           String?
 
-  createdAt   DateTime  @map("created_at") @default(now())
-  updatedAt   DateTime? @map("updated_at") @updatedAt
-  deletedAt   DateTime? @map("deleted_at")
-  version     Int       @default(0)
+  createdAt             DateTime                @map("created_at") @default(now())
+  updatedAt             DateTime?               @map("updated_at") @updatedAt
+  deletedAt             DateTime?               @map("deleted_at")
+  version               Int                     @default(0)
 
-  UserRole UserRole[]
+  UserRole              UserRole[]
+  QurbanEventCommittee  QurbanEventCommitee[]
 
   @@unique([id])
 
@@ -29,19 +30,23 @@ model Role {
 }
 
 model User {
-  id          String    @id @default(uuid())
-  name        String
-  email       String?   @unique
-  phoneNumber String?   @unique @map("phone_number")
-  image       String?
+  id                            String                            @id @default(uuid())
+  name                          String
+  email                         String?                           @unique
+  phoneNumber                   String?                           @unique @map("phone_number")
+  image                         String?
 
-  createdAt   DateTime  @map("created_at") @default(now())
-  updatedAt   DateTime? @map("updated_at") @updatedAt
-  deletedAt   DateTime? @map("deleted_at")
-  version     Int       @default(0)
+  createdAt                     DateTime                          @map("created_at") @default(now())
+  updatedAt                     DateTime?                         @map("updated_at") @updatedAt
+  deletedAt                     DateTime?                         @map("deleted_at")
+  version                       Int                               @default(0)
 
-  UserRole    UserRole[]
-  MosqueUser  MosqueUser[]
+  UserRole                      UserRole[]
+  MosqueUser                    MosqueUser[]
+  QurbanEventCommittee          QurbanEventCommitee[]
+  QurbanEventCitizen            QurbanEventCitizen[]
+  QurbanRegistrationParticipant QurbanRegistrationParticipant[]
+
 
   @@unique([id])
 
@@ -49,16 +54,16 @@ model User {
 }
 
 model UserRole {
-  id       String     @id @default(uuid())
-  userId   String     @map("user_id")
-  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  roleId   String     @map("role_id")
-  role     Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  id        String      @id @default(uuid())
+  userId    String      @map("user_id")
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleId    String      @map("role_id")
+  role      Role        @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime  @map("created_at") @default(now())
-  updatedAt DateTime? @map("updated_at") @updatedAt
-  deletedAt DateTime? @map("deleted_at")
-  version   Int       @default(0)
+  createdAt DateTime    @map("created_at") @default(now())
+  updatedAt DateTime?   @map("updated_at") @updatedAt
+  deletedAt DateTime?   @map("deleted_at")
+  version   Int         @default(0)
 
   @@unique([id, userId, roleId])
 
@@ -66,16 +71,17 @@ model UserRole {
 }
 
 model Mosque {
-  id        String    @id @default(uuid())
-  name      String
-  address   String?   @db.Text
+  id                  String                @id @default(uuid())
+  name                String
+  address             String?               @db.Text
 
-  createdAt DateTime  @map("created_at") @default(now())
-  updatedAt DateTime? @map("updated_at") @updatedAt
-  deletedAt DateTime? @map("deleted_at")
-  version   Int       @default(0)
+  createdAt           DateTime              @map("created_at") @default(now())
+  updatedAt           DateTime?             @map("updated_at") @updatedAt
+  deletedAt           DateTime?             @map("deleted_at")
+  version             Int                   @default(0)
 
-  MosqueUser MosqueUser[]
+  MosqueUser          MosqueUser[]
+  MosqueQurbanEvent   MosqueQurbanEvent[]
 
   @@unique([name])
   @@map("mosques")
@@ -94,4 +100,162 @@ model MosqueUser {
   version   Int       @default(0)
 
   @@map("mosque_user")
+}
+
+model QurbanEvents {
+  id                    String                  @id @default(uuid())
+  yearExecution         Int                     @map("year_execution")
+  dateExecution         DateTime?               @map("date_execution")
+  description           String?                 @db.Text
+
+  createdAt             DateTime                @map("created_at") @default(now())
+  updatedAt             DateTime?               @map("updated_at") @updatedAt
+  deletedAt             DateTime?               @map("deleted_at")
+  version               Int                     @default(0)
+
+  mosqueQurbanEvent     MosqueQurbanEvent[]
+  qurbanEventCommittee  QurbanEventCommitee[]
+  qurbanEventCitizen    QurbanEventCitizen[]
+  qurbanRegistration    QurbanRegistration[]
+
+  @@unique([id])
+
+  @@map("qurban_events")
+}
+
+model MosqueQurbanEvent {
+  id              String        @id @default(uuid())
+  mosqueId        String        @map("mosque_id")
+  mosque          Mosque        @relation(fields: [mosqueId], references: [id], onDelete: Cascade)
+  qurbanEventId   String        @map("qurban_event_id")
+  qurbanEvent     QurbanEvents  @relation(fields: [qurbanEventId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime      @map("created_at") @default(now())
+  updatedAt       DateTime?     @map("updated_at") @updatedAt
+  deletedAt       DateTime?     @map("deleted_at")
+  version         Int           @default(0)
+
+  @@unique([id])
+
+  @@map("mosque_qurban_event")
+}
+
+model QurbanEventCommitee {
+  id              String        @id @default(uuid())
+  qurbanEventId   String        @map("qurban_event_id")
+  qurbanEvent     QurbanEvents  @relation(fields: [qurbanEventId], references: [id], onDelete: Cascade)
+  userId          String        @map("user_id")
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleId          String        @map("role_id")
+  role            Role          @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime      @map("created_at") @default(now())
+  updatedAt       DateTime?     @map("updated_at") @updatedAt
+  deletedAt       DateTime?     @map("deleted_at")
+  version         Int           @default(0)
+
+  @@unique([id])
+
+  @@map("qurban_event_committee")
+}
+
+model QurbanEventCitizen {
+  id              String        @id @default(uuid())
+  qurbanEventId   String        @map("qurban_event_id")
+  qurbanEvent     QurbanEvents  @relation(fields: [qurbanEventId], references: [id], onDelete: Cascade)
+  userId          String        @map("user_id")
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime      @map("created_at") @default(now())
+  updatedAt       DateTime?     @map("updated_at") @updatedAt
+  deletedAt       DateTime?     @map("deleted_at")
+  version         Int           @default(0)
+
+  @@unique([id])
+
+  @@map("qurban_event_citizen")
+}
+
+model SacrificialAnimals {
+  id                  String                  @id @default(uuid())
+  name                String
+  code                String
+  minimalAge          Int                     @map("minimal_age")
+  maximalUser         Int                     @map("maximal_user")
+
+  createdAt           DateTime                @map("created_at") @default(now())
+  updatedAt           DateTime?               @map("updated_at") @updatedAt
+  deletedAt           DateTime?               @map("deleted_at")
+  version             Int                     @default(0)
+
+  QurbanRegistration  QurbanRegistration[]
+
+  @@unique([id])
+
+  @@map("sacrificial_animals")
+}
+
+model QurbanRegistration {
+  id                              String                            @id @default(uuid())
+  qurbanEventId                   String                            @map("qurban_event_id")
+  qurbanEvent                     QurbanEvents                      @relation(fields: [qurbanEventId], references: [id], onDelete: Cascade)
+  sacrificialAnimalId             String                            @map("sacrificial_animal_id")
+  sacrificialAnimal               SacrificialAnimals                @relation(fields: [sacrificialAnimalId], references: [id], onDelete: Cascade)
+
+  createdAt                       DateTime                          @map("created_at") @default(now())
+  updatedAt                       DateTime?                         @map("updated_at") @updatedAt
+  deletedAt                       DateTime?                         @map("deleted_at")
+  version                         Int                               @default(0)
+
+  QurbanRegistrationParticipant   QurbanRegistrationParticipant[]
+  QurbanRegistrationStatus        QurbanRegistrationStatus[]
+
+  @@unique([id])
+
+  @@map("qurban_registration")
+}
+
+model QurbanRegistrationParticipant {
+  id                    String              @id @default(uuid())
+  qurbanRegistrationId  String              @map("qurban_registration_id")
+  qurbanRegistration    QurbanRegistration  @relation(fields: [qurbanRegistrationId], references: [id], onDelete: Cascade)
+  userId                String              @map("user_id")
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt             DateTime            @map("created_at") @default(now())
+  updatedAt             DateTime?           @map("updated_at") @updatedAt
+  deletedAt             DateTime?           @map("deleted_at")
+  version               Int                 @default(0)
+
+  @@unique([id])
+
+  @@map("qurban_registration_participant")
+}
+
+model QurbanRegistrationStatus {
+  id                    String                    @id @default(uuid())
+  qurbanRegistrationId  String                    @map("qurban_registration_id")
+  qurbanRegistration    QurbanRegistration        @relation(fields: [qurbanRegistrationId], references: [id], onDelete: Cascade)
+  status                QurbanRegistrationStates  @default(REGISTERED)
+
+  createdAt             DateTime            @map("created_at") @default(now())
+  updatedAt             DateTime?           @map("updated_at") @updatedAt
+  deletedAt             DateTime?           @map("deleted_at")
+  version               Int                 @default(0)
+
+  @@unique([id])
+
+  @@map("qurban_registration_status")
+}
+
+enum QurbanRegistrationStates {
+  REGISTERED
+  CANCELLED
+  ARRIVED
+  SLAUGHTERING
+  SLAUGHTERED
+  SKINNING
+  MEAT_CUTTING
+  MEAT_DELIVERING
+  MEAT_DELIVERED
 }

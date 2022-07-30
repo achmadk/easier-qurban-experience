@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT, IControllerCoreLogout } from 'controllers'
-import { getMosqueID, getMosqueName } from 'state-management'
+import { getMosqueID, getMosqueName, getQurbanEventId, getQurbanEventYearExecution } from 'state-management'
 
 import { addRefProps, PropsWithInnerRef } from "utils"
 
@@ -17,7 +17,7 @@ export interface HeaderMosqueBaseProps extends PropsWithInnerRef<HTMLElement> {
   /**
    * @default 'DASHBOARD'
    */
-  headerType?: 'DASHBOARD' | 'CITIZENS' | 'EVENTS'
+  headerType?: 'DASHBOARD' | 'CITIZENS' | 'QURBAN_EVENTS' | 'SPECIFIED_QURBAN_EVENT'
 }
 
 const HeaderMosqueBase = <
@@ -26,6 +26,8 @@ const HeaderMosqueBase = <
   const { user } = useUser()
   const mosqueId = useSelector(getMosqueID)
   const mosqueName = useSelector(getMosqueName)
+  const qurbanEventYearExecution = useSelector(getQurbanEventYearExecution)
+  const qurbanEventId = useSelector(getQurbanEventId)
 
   const logoutCtrl = container.get<IControllerCoreLogout>(
     CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
@@ -59,7 +61,7 @@ const HeaderMosqueBase = <
               </Link>
               {headerType !== 'DASHBOARD' && (
                 <span className="text-white">
-                  <i className="fas fa-arrow-right" />
+                  <i className="fas fa-arrow-right" style={{ width: '1rem' }} />
                 </span>
               )}
               {headerType === 'CITIZENS' && (
@@ -70,11 +72,19 @@ const HeaderMosqueBase = <
                   </a>
                 </Link>
               )}
-              {headerType === 'EVENTS' && (
+              {headerType === 'QURBAN_EVENTS' && (
                 <Link href={`/admin/mosques/${mosqueId}/events`}>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
-                    Events
+                    Qurban Events
+                  </a>
+                </Link>
+              )}
+              {headerType === 'SPECIFIED_QURBAN_EVENT' && (
+                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}`}>
+                  <a
+                    className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
+                    {qurbanEventYearExecution ? `${qurbanEventYearExecution} Qurban Event` : ''}
                   </a>
                 </Link>
               )}

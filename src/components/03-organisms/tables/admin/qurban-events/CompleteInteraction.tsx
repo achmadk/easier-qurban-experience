@@ -1,44 +1,40 @@
-import { type HTMLAttributes, useMemo } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useContext, useMemo } from 'react'
+import { useDispatch } from "react-redux"
 
 import Link from 'next/link'
 
-import { getMosqueID, setQurbanEventData } from "state-management"
+import { ContextPageQurbanEvents } from 'contexts'
+
+import { setQurbanEventData } from "state-management"
 
 import { addRefProps, PropsWithInnerRef } from "utils"
 import { IModelQurbanEventWithID } from 'models'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface TableAdminQurbanEventBaseProps<
-  DataType extends IModelQurbanEventWithID = IModelQurbanEventWithID
->
+export interface TableAdminQurbanEventCompleteInteractionBaseProps
   extends PropsWithInnerRef {
-  containerProps?: HTMLAttributes<HTMLDivElement>
-  data?: DataType[] | null
 }
 
-const TableAdminQurbanEventBase = <
+const TableAdminQurbanEventCompleteInteractionBase = <
   DataType extends IModelQurbanEventWithID = IModelQurbanEventWithID,
-  PropType extends TableAdminQurbanEventBaseProps<DataType> = TableAdminQurbanEventBaseProps<DataType>
->({
-  innerRef,
-  containerProps = { className: 'w-full xl:w-5/12 px-4' },
-  data = null
-}: PropType) => {
+  PropType extends TableAdminQurbanEventCompleteInteractionBaseProps = TableAdminQurbanEventCompleteInteractionBaseProps
+>({ innerRef }: PropType) => {
   const dispatch = useDispatch()
-  const mosqueId = useSelector(getMosqueID)
+  const { toggleMode, qurbanEventsData } = useContext(ContextPageQurbanEvents)
   const emptyData = useMemo(() => ([{
     id: null,
     yearExecution: null
   }] as DataType[]), [])
 
-  const usedData = data?.length > 0 ? data : emptyData
+  const usedData = qurbanEventsData?.length > 0 ? qurbanEventsData : emptyData
 
+  const handleButtonAddClicked = () =>
+    toggleMode('CREATE')
   const handleTableItemClicked = (data: DataType) => () =>
     dispatch(setQurbanEventData(data))
 
   return (
-    <div ref={innerRef} {...containerProps}>
+    <div ref={innerRef} className="w-full px-4">
       <div
         className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div className="rounded-t mb-0 px-4 py-3 border-0">
@@ -51,12 +47,12 @@ const TableAdminQurbanEventBase = <
             </div>
             <div
               className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <Link href={`/admin/mosques/${mosqueId}/events`}>
-              <a
-                className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                Manage
-              </a>
-              </Link>
+              <button
+                type="button"
+                className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                onClick={handleButtonAddClicked}>
+                Add
+              </button>
             </div>
           </div>
         </div>
@@ -77,8 +73,8 @@ const TableAdminQurbanEventBase = <
             </thead>
             <tbody>
               {usedData.map((data, index) => (
-                <Link key={`qurban-event-list-${index}`} href={`/admin/mosques/${data.mosqueId}/events/${data.id}`}>
-                  <tr className="cursor-pointer" onClick={handleTableItemClicked(data)}>
+                <Link key={`qurban-event-${index}`} href={`/admin/mosques/${data.mosqueId}/events/${data.id}`}>
+                  <tr className='cursor-pointer' onClick={handleTableItemClicked(data as DataType)}>
                     <th
                       className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       {data?.yearExecution ?? '-'}
@@ -98,6 +94,6 @@ const TableAdminQurbanEventBase = <
   )
 }
 
-export const TableAdminQurbanEvent = addRefProps(
-  TableAdminQurbanEventBase
+export const TableAdminQurbanEventCompleteInteraction = addRefProps(
+  TableAdminQurbanEventCompleteInteractionBase
 )
