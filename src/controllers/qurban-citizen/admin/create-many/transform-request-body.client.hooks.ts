@@ -5,7 +5,7 @@ import { getMosqueID } from "state-management"
 import { IControllerCoreTransformRequestBody, useControllerCoreEncryptionTransformRequestBodyBaseClient } from "controllers"
 import { ICitizenBase } from "models/user/citizen"
 
-export interface DefaultQurbanCitizenAdminCreateManyRequestBody<
+interface DefaultQurbanCitizenAdminCreateManyRequestBody<
   CitizenType extends ICitizenBase = ICitizenBase
 > {
   mosqueId: string
