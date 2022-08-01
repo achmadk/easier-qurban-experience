@@ -38,7 +38,8 @@ export function getControllerCitizenAdminCreateManyHandleAPIRouteServer<
         }))
       })
       res.status(200).json({ data: savedCitizens })
-    } catch {
+    } catch (error) {
+      console.log(error)
       res.status(500).send('Error Create Many Citizens')
     } finally {
       prisma.$disconnect()

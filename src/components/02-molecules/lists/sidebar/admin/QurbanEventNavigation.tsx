@@ -42,10 +42,24 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           </Link>
         </li>
         <li className="items-center">
+          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`}>
+            <a
+              className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/citizens`)}>
+              <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              Qurban Citizens
+            </a>
+          </Link>
+        </li>
+        {/**
+          * @todo uncomment those codes in order to provide link
+          * to qurban committees page when ready
+          * <-- [START] -->
+          */}
+        {/* <li className="items-center">
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`}>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/qurban_registrations`)}>
-              <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              <i className="fab fa-wpforms text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
               Qurban Registration
             </a>
           </Link>
@@ -54,17 +68,8 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/committees`}>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/committees`)}>
-              <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              <i className="fas fa-people-line text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
               Committees
-            </a>
-          </Link>
-        </li>
-        <li className="items-center">
-          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`}>
-            <a
-              className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/citizens`)}>
-              <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-              Citizens
             </a>
           </Link>
         </li>
@@ -72,11 +77,12 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/reports`}>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/reports`)}>
-              <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
+              <i className="fas fa-chart-column text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
               Reports
             </a>
           </Link>
-        </li>
+        </li> */}
+        {/** <-- [END] --> */}
       </ul>
     </>
   )

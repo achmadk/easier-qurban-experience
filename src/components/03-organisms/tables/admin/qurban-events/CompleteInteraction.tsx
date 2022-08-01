@@ -74,7 +74,7 @@ const TableAdminQurbanEventCompleteInteractionBase = <
             <tbody>
               {usedData.map((data, index) => (
                 <Link key={`qurban-event-${index}`} href={`/admin/mosques/${data.mosqueId}/events/${data.id}`}>
-                  <tr className='cursor-pointer' onClick={handleTableItemClicked(data as DataType)}>
+                  <tr className='cursor-pointer hover:text-blue-600' onClick={handleTableItemClicked(data as DataType)}>
                     <th
                       className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       {data?.yearExecution ?? '-'}

@@ -17,7 +17,13 @@ export interface HeaderMosqueBaseProps extends PropsWithInnerRef<HTMLElement> {
   /**
    * @default 'DASHBOARD'
    */
-  headerType?: 'DASHBOARD' | 'CITIZENS' | 'QURBAN_EVENTS' | 'SPECIFIED_QURBAN_EVENT'
+  headerType?: 
+    | 'DASHBOARD'
+    | 'CITIZENS'
+    | 'QURBAN_EVENTS'
+    | 'SPECIFIED_QURBAN_EVENT'
+    | 'QURBAN_EVENT_CITIZENS'
+    | 'QURBAN_EVENT_REGISTRATION'
 }
 
 const HeaderMosqueBase = <
@@ -80,11 +86,32 @@ const HeaderMosqueBase = <
                   </a>
                 </Link>
               )}
-              {headerType === 'SPECIFIED_QURBAN_EVENT' && (
+              {['SPECIFIED_QURBAN_EVENT', 'QURBAN_EVENT_CITIZENS', 'QURBAN_EVENT_REGISTRATION'].includes(headerType) && (
                 <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}`}>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                     {qurbanEventYearExecution ? `${qurbanEventYearExecution} Qurban Event` : ''}
+                  </a>
+                </Link>
+              )}
+              {['QURBAN_EVENT_CITIZENS', 'QURBAN_EVENT_REGISTRATION'].includes(headerType) && (
+                <span className="text-white">
+                  <i className="fas fa-arrow-right" style={{ width: '1rem' }} />
+                </span>
+              )}
+              {headerType === 'QURBAN_EVENT_CITIZENS' && (
+                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`}>
+                  <a
+                    className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
+                    Qurban Citizens
+                  </a>
+                </Link>
+              )}
+              {headerType === 'QURBAN_EVENT_REGISTRATION' && (
+                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`}>
+                  <a
+                    className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
+                    Qurban Registration
                   </a>
                 </Link>
               )}

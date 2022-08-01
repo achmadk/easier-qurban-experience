@@ -9,11 +9,19 @@ import { getMosqueID } from 'state-management';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ListSidebarAdminMosqueNavigationBaseProps
-  extends PropsWithInnerRef<HTMLUListElement> {}
+  extends PropsWithInnerRef<HTMLUListElement> {
+  /**
+   * @default 'MOSQUE'
+   */
+  navigationForPage?: 'MOSQUE' | 'QURBAN_EVENTS'
+}
 
 const ListSidebarAdminMosqueNavigationBase = <
   PropType extends ListSidebarAdminMosqueNavigationBaseProps = ListSidebarAdminMosqueNavigationBaseProps
->({ innerRef }: PropType) => {
+>({
+  innerRef,
+  navigationForPage = 'MOSQUE'
+}: PropType) => {
   const router = useRouter()
   const mosqueId = useSelector(getMosqueID)
 
@@ -45,7 +53,7 @@ const ListSidebarAdminMosqueNavigationBase = <
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events`)}>
               <i className="fas fa-calendar-days text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-              Qurban Events
+              {`${navigationForPage === 'QURBAN_EVENTS' ? 'All ' : ''}Qurban Events`}
             </a>
           </Link>
         </li>
@@ -54,7 +62,7 @@ const ListSidebarAdminMosqueNavigationBase = <
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/citizens`)}>
               <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
-              Citizens
+              {`${navigationForPage === 'QURBAN_EVENTS' ? 'Mosque ' : ''}Citizens`}
             </a>
           </Link>
         </li>
@@ -76,6 +84,6 @@ const ListSidebarAdminMosqueNavigationBase = <
   )
 }
 
-export const ListSidebarAdminMosqueNavigation = addRefProps<HTMLUListElement>(
-  ListSidebarAdminMosqueNavigationBase
-)
+export const ListSidebarAdminMosqueNavigation = addRefProps<
+  HTMLUListElement, ListSidebarAdminMosqueNavigationBaseProps
+>(ListSidebarAdminMosqueNavigationBase)

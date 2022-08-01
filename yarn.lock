@@ -2472,10 +2472,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12, @types/node@npm:^18.6.2":
-  version: 18.6.2
-  resolution: "@types/node@npm:18.6.2"
-  checksum: 644c460baedb1fbbd55369ab621167cb39ddaa727fd4fcf4bc7080183cf936d7ff8c2c886ba93ff42768d6f7a579a540e6d1e63d3adba4e5758fb13671ae68ce
+"@types/node@npm:*, @types/node@npm:>=12, @types/node@npm:^18.6.3":
+  version: 18.6.3
+  resolution: "@types/node@npm:18.6.3"
+  checksum: 38495b8fd27200d2b7ab9ccd8c1e2475d2411fba15330f2cba869a85ef79dd42382a2658c8dd298ace8c21ed3bfafcdea408faecd74928b144377d07d00e7c8c
   languageName: node
   linkType: hard
 
@@ -2777,7 +2777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.7.1":
+"acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.8.0":
   version: 8.8.0
   resolution: "acorn@npm:8.8.0"
   bin:
@@ -4512,7 +4512,7 @@ __metadata:
     "@prisma/client": ^4.1.1
     "@reduxjs/toolkit": ^1.8.3
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^18.6.2
+    "@types/node": ^18.6.3
     "@types/react": ^18.0.15
     "@typescript-eslint/eslint-plugin": ^5.31.0
     add: ^2.0.6
@@ -4528,7 +4528,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     flowbite: ^1.5.1
     flowbite-datepicker: ^1.2.2
-    flowbite-react: ^0.1.3
+    flowbite-react: ^0.1.4
     formik: ^2.2.9
     husky: ^8.0.1
     inversify-esm: ^2.0.0
@@ -5020,13 +5020,13 @@ __metadata:
   linkType: hard
 
 "espree@npm:^9.3.2":
-  version: 9.3.2
-  resolution: "espree@npm:9.3.2"
+  version: 9.3.3
+  resolution: "espree@npm:9.3.3"
   dependencies:
-    acorn: ^8.7.1
+    acorn: ^8.8.0
     acorn-jsx: ^5.3.2
     eslint-visitor-keys: ^3.3.0
-  checksum: 9a790d6779847051e87f70d720a0f6981899a722419e80c92ab6dee01e1ab83b8ce52d11b4dc96c2c490182efb5a4c138b8b0d569205bfe1cd4629e658e58c30
+  checksum: 33e8a36fc15d082e68672e322e22a53856b564d60aad8f291a667bfc21b2c900c42412d37dd3c7a0f18b9d0d8f8858dabe8776dbd4b4c2f72c5cf4d6afeabf65
   languageName: node
   linkType: hard
 
@@ -5432,9 +5432,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite-react@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "flowbite-react@npm:0.1.3"
+"flowbite-react@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "flowbite-react@npm:0.1.4"
   dependencies:
     "@floating-ui/react-dom": ^0.6.3
     "@floating-ui/react-dom-interactions": ^0.4.0
@@ -5447,7 +5447,7 @@ __metadata:
     react: ^17 || ^18
     react-dom: ^17 || ^18
     tailwindcss: ^3
-  checksum: b395729d8717e05fa0aab757405943f0306f46adf318beede83200d16475c1d83b3d88fb15edfb934d107fd2403299ee0dc2f8ab2779e27b9bb79b3bccfb4156
+  checksum: 1650338e547451eb4328ac0074b7caa6e2fd9dd7735bb3e881e8faac53dbfa9bd8c3c6362ce0b9573abf837a132341a56aff7698c654b7d26187937aa33e81b2
   languageName: node
   linkType: hard
 
@@ -10692,9 +10692,9 @@ __metadata:
   linkType: hard
 
 "type-fest@npm:^2.5.2, type-fest@npm:^2.8.0":
-  version: 2.17.0
-  resolution: "type-fest@npm:2.17.0"
-  checksum: cb626b7434f463632643ee8681c900d17739decd820f28ed2e77de7fb8fc406f30f3e86b1b8f26a76f94fbf781e96347febaa8d06b5cef21fdc5f65ded86ad05
+  version: 2.18.0
+  resolution: "type-fest@npm:2.18.0"
+  checksum: 0737128d9d77b93793c6ee443e304462a792f5b723a6be035d6cb488c5610a8baa00522805421341c04324c80efba9849885bbfbc5a9623d0672fe8712969f62
   languageName: node
   linkType: hard
 

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 
 import Link from 'next/link'
 
@@ -8,13 +8,17 @@ import { addRefProps, PropsWithInnerRef } from '../../../utils'
 const HeaderBase = ({ innerRef }: PropsWithInnerRef) => {
   const [hamburgerMenuOpened, setHamburgerMenuOpened] = useState(false)
 
-  const navigation = useMemo(
-    () => [
-      { title: 'Home', path: '#home' },
-      { title: 'Features', path: '#features' }
-    ],
-    []
-  )
+  /**
+   * @todo uncomment navigation variable if features section
+   * is ready
+   */
+  // const navigation = useMemo(
+  //   () => [
+  //     { title: 'Home', path: '#home' },
+  //     { title: 'Features', path: '#features' }
+  //   ],
+  //   []
+  // )
 
   const toggleHamburgerMenu = useCallback(() => {
     setHamburgerMenuOpened((prevState) => !prevState)
@@ -60,11 +64,15 @@ const HeaderBase = ({ innerRef }: PropsWithInnerRef) => {
             </a>
           </li>
           <div className="order-1 flex-1 justify-center items-center space-y-5 md:flex md:space-x-6 md:space-y-0">
-            {navigation.map((item, idx) => (
+            {/**
+              * @todo uncomment navigation variable if features section
+              * is ready
+              */}
+            {/* {navigation.map((item, idx) => (
               <li className="text-gray-600 hover:text-blue-700" key={idx}>
                 <a href={item.path}>{item.title}</a>
               </li>
-            ))}
+            ))} */}
           </div>
         </ul>
       </nav>

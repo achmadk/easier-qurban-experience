@@ -11,11 +11,19 @@ import { useControllerCitizenAdminCreateManyHandleSubmitClient } from 'controlle
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TableAdminCitizensCompleteInteractionBaseProps
-  extends PropsWithInnerRef {}
+  extends PropsWithInnerRef {
+  /**
+   * @default 'MOSQUE_CITIZEN'
+   */
+  entityPurpose?: 'MOSQUE_CITIZEN' | 'QURBAN_CITIZEN'
+}
 
 const TableAdminCitizensCompleteInteractionBase = <
   PropType extends TableAdminCitizensCompleteInteractionBaseProps = TableAdminCitizensCompleteInteractionBaseProps
->({ innerRef }: PropType) => {
+>({
+  innerRef,
+  entityPurpose = 'MOSQUE_CITIZEN'
+}: PropType) => {
     const {
       isAddBatch,
       setIsAddBatch,
@@ -45,9 +53,25 @@ const TableAdminCitizensCompleteInteractionBase = <
     setAddedCitizens([])
     setIsAddBatch(false)
   }
+  const handleImportButtonClicked = async () => {
+    try {
+      const confirmResponse = window.confirm('Are you sure to import data from mosque citizens?')
+      if (confirmResponse) {
+        await handleAddManyCitizens({
+          fromPage: 'QURBAN_CITIZEN',
+          submitQurbanCitizensType:'CREATE_MANY_FROM_MOSQUE_CITIZEN'
+        })
+      }
+    } finally {
+      setTriggerReloadMosqueData(true)
+    }
+  }
   const handleAddManyCitizensButtonClicked = async () => {
     try {
-      await handleAddManyCitizens(addedCitizens)
+      await handleAddManyCitizens({
+        fromPage: entityPurpose,
+        citizens: addedCitizens
+      })
     } finally {
       handleCancelAddBatchButtonClicked()
       setTriggerReloadMosqueData(true)
@@ -69,12 +93,22 @@ const TableAdminCitizensCompleteInteractionBase = <
             <div
               className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               {!isAddBatch && (
-                <button
-                  type="button"
-                  className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  onClick={handleAddBatchButtonClicked}>
-                  Add Batch
-                </button>
+                <>
+                  {entityPurpose === 'QURBAN_CITIZEN' && (
+                    <button
+                      type="button"
+                      className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      onClick={handleImportButtonClicked}>
+                      Import from mosque citizens data
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    onClick={handleAddBatchButtonClicked}>
+                    Add Batch
+                  </button>
+                </>
               )}
               {isAddBatch && (
                 <>

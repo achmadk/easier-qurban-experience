@@ -39,6 +39,14 @@ export default function AdminMosqueID<
 
   const paramsIsReady = checkParamsIsReady(props)
 
+  const loadData = async () => {
+    await Promise.all([
+      getMosqueData({ mosqueId: props.mosqueId }),
+      getCitizenData(props.mosqueId),
+      getQurbanEventsData({ mosqueId: props.mosqueId })
+    ])
+  }
+
   useEffect(() => {
     if (props?.mosqueId) {
       setTriggerLoadData(true)
@@ -47,9 +55,10 @@ export default function AdminMosqueID<
   
   useEffect(() => {
     if (triggerLoadData) {
-      getMosqueData({ mosqueId: props.mosqueId })
-      getCitizenData(props.mosqueId)
-      getQurbanEventsData({ mosqueId: props.mosqueId })
+      // getMosqueData({ mosqueId: props.mosqueId })
+      // getCitizenData(props.mosqueId)
+      // getQurbanEventsData({ mosqueId: props.mosqueId })
+      loadData()
       setTriggerLoadData(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

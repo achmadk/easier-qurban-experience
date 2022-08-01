@@ -37,7 +37,9 @@ export const reduxSliceMosqueBase = createSlice<DefaultReduxSliceMosqueBaseState
         state.data = action.payload
       })
       .addCase(setQurbanEventData, (state, action) => {
-        state.data.qurbanEvent = action.payload
+        if (state.data !== null) {
+          state.data.qurbanEvent = action.payload
+        }
       })
       .addCase(logout, (state) => {
         state.data = null
