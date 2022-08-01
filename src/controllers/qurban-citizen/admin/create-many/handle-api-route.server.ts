@@ -4,8 +4,8 @@ import { PrismaClient } from '@prisma/client';
 import { getControllerCitizenAdminFindGetResourceData, getControllerCoreDecryptionTransformRequestBodyServer, IControllerCoreHandleAPIRoute } from "controllers";
 import { ICitizenBase } from "models";
 
-export const CONTROLLER_QURBAN_CITIZEN_ADMIN_FIND_HANDLE_API_ROUTE_SERVER =
-  'ControllerQurbanCitizenAdminFindHandleAPIRouteServer'
+export const CONTROLLER_QURBAN_CITIZEN_ADMIN_CREATE_MANY_HANDLE_API_ROUTE_SERVER =
+  'ControllerQurbanCitizenAdminCreateManyHandleAPIRouteServer'
 
 export interface DefaultQurbanCitizenAdminCreateManyRequestBody {
   type: 'CREATE_MANY_FROM_FILE' | 'CREATE_MANY_FROM_MOSQUE_CITIZEN'
