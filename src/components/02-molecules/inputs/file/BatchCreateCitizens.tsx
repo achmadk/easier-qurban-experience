@@ -73,7 +73,7 @@ const InputFileBatchCreateCitizensBase = <
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
       <label {...getRootProps({ className: borderClassName })}>
         <span className="flex items-center justify-center space-x-2">
-          <i className={iconClassName} />
+          <i className={iconClassName} style={{ width: '1rem' }} />
           <span className="font-medium">
             {!isDragActive && (
               <>
