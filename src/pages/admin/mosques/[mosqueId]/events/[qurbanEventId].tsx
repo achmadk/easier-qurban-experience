@@ -9,8 +9,12 @@ import { ListSidebarAdminOtherList } from 'components/02-molecules/lists/sidebar
 import { HeaderMosque } from 'components/03-organisms/header/mosque/Base'
 import { FooterAdmin } from 'components/03-organisms/footer/Admin'
 import { ListSidebarAdminQurbanEventNavigation } from 'components/02-molecules/lists/sidebar/admin/QurbanEventNavigation'
-import { TableAdminQurbanRegistration } from 'components/03-organisms/tables/admin/qurban-registrations/Base'
 import { TableAdminQurbanCitizens } from 'components/03-organisms/tables/admin/qurban-citizens/Base'
+/**
+  * @todo uncomment those codes in order to provide link
+  * to qurban registration page when ready
+  */
+// import { TableAdminQurbanRegistration } from 'components/03-organisms/tables/admin/qurban-registrations/Base'
 
 import { useControllerCoreRouterIsParamsReady, useControllerMosqueAdminFindGetDataClient, useControllerQurbanCitizenAdminFindGetResourceDataClient, useControllerQurbanCommitteeAdminGetResourceDataClient, useControllerQurbanEventAdminFindGetResourceDataClient } from 'controllers'
 
@@ -31,7 +35,7 @@ export default function AdminMosqueEventID<
 
   const { getData: getMosqueData } =
     useControllerMosqueAdminFindGetDataClient()
-  const { data: qurbanEventsData, getData: getQurbanEventsData } =
+  const { getData: getQurbanEventsData } =
     useControllerQurbanEventAdminFindGetResourceDataClient<QurbanEventDataType>()
   const { data: qurbanCitizenData, getData: getQurbanCitizenData } =
     useControllerQurbanCitizenAdminFindGetResourceDataClient()
@@ -80,7 +84,11 @@ export default function AdminMosqueEventID<
             <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
               <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
-                  {/* <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/qurban_registrations`}> */}
+                  {/**
+                    * @todo uncomment those codes in order to provide link
+                    * to qurban registration page when ready
+                    */}
+                  {/* <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/qurban_registrations`}>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -106,7 +114,7 @@ export default function AdminMosqueEventID<
                         </div>
                       </div>
                     </div>
-                  {/* </Link> */}
+                  </Link> */}
                   <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/citizens`}>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                       <div
@@ -170,7 +178,11 @@ export default function AdminMosqueEventID<
             </div>
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <div className="flex flex-wrap mt-4">
-                <TableAdminQurbanRegistration />
+                {/**
+                  * @todo uncomment those codes in order to provide link
+                  * to qurban registration page when ready
+                  */}
+                {/* <TableAdminQurbanRegistration /> */}
                 <TableAdminQurbanCitizens data={qurbanCitizenData} />
                 <TableAdminQurbanCommittees data={qurbanCommitteesData} />
               </div>
