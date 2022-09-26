@@ -1,7 +1,7 @@
 import { FormikHelpers } from "formik";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
-import { container } from 'inversify-hooks-esm';
+import { useContainerGet } from 'inversify-hooks-esm';
 import { AxiosInstance } from "axios";
 
 import { getMosqueID } from "state-management";
@@ -23,7 +23,7 @@ export function useControllerQurbanEventAdminAddHandleSubmitClient<
   const { transformRequestBody: encryptRequestBody }
     = useControllerCoreEncryptionTransformRequestBodyBaseClient<TransformedInputType>()
 
-  const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
+  const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
   
   const handleSubmit = async (input: InputType, { setSubmitting }: FormikHelpers<InputType>) => {
     setSubmitting(true)

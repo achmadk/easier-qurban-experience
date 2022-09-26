@@ -1,4 +1,4 @@
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { AxiosInstance } from 'axios';
 import { toast } from 'react-toastify';
 
@@ -28,7 +28,7 @@ export function useControllerCitizenAdminCreateManyHandleSubmitClient<
   CitizenType extends ICitizenBase = ICitizenBase,
   InputType extends DefaultCitizenAdminCreateManyHandleSubmitClientOptions<CitizenType> = DefaultCitizenAdminCreateManyHandleSubmitClientOptions<CitizenType>
 >(): IControllerCoreHandleSubmit<InputType> {
-  const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
+  const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
   const qurbanEventId = useSelector(getQurbanEventId)
   const mosqueId = useSelector(getMosqueID)
 

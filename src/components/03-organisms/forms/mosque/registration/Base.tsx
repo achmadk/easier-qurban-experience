@@ -1,6 +1,5 @@
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
-import { useMemo } from 'react'
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { object, string } from 'yup'
 
 import { IMosqueBase, IMosqueWithID } from "models"
@@ -21,11 +20,9 @@ export const ComponentOrganismFormMosqueRegistrationBase = <
   OutputType extends IMosqueWithID = IMosqueWithID,
   PropType extends ComponentOrganismFormMosqueRegistrationBaseProps<OutputType> = ComponentOrganismFormMosqueRegistrationBaseProps<OutputType>
 >({ innerRef, onAfterSubmit }: PropType) => {
-  const mosqueRegisterCtrl = useMemo(() =>
-    container.get<IControllerCoreHandleSubmit<InputType, OutputType | null>>(
-      CONTROLLER_MOSQUE_ADMIN_REGISTER_HANDLE_SUBMIT_CLIENT
-    )
-  , [])
+  const mosqueRegisterCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType, OutputType | null>>(
+    CONTROLLER_MOSQUE_ADMIN_REGISTER_HANDLE_SUBMIT_CLIENT
+  )
   const initialValue: InputType = {
     name: '',
     address: ''

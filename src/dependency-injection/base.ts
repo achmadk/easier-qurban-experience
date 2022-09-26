@@ -31,4 +31,5 @@ export function bindDependencyInjectionMethods() {
   container
     .bind(CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT)
     .toDynamicValue(() => useControllerUserAdminLogoutBaseClient())
+  return container
 }

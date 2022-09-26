@@ -1,4 +1,4 @@
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { AxiosInstance } from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -23,7 +23,7 @@ export function useControllerMosqueAdminFindGetDataClient<
   const isMosqueDataEmpty = useSelector(checkMosqueDataEmpty)
 
   const { transformRequestBody } = useControllerMosqueFindTransformRequestBodyClient()
-  const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
+  const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
 
   const getData = async (options?: OptionsType | null) => {
     const mosqueId = options?.mosqueId ?? null

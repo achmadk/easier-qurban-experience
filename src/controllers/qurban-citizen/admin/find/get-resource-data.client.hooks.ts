@@ -1,4 +1,4 @@
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { AxiosInstance } from 'axios';
@@ -22,7 +22,7 @@ export function useControllerQurbanCitizenAdminFindGetResourceDataClient<
 
   const fallbackQurbanEventId = useSelector(getQurbanEventId)
 
-  const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
+  const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
 
   const getData = async (qurbanEventId = fallbackQurbanEventId) => {
     const query = await encryptRequestBody({ qurbanEventId })

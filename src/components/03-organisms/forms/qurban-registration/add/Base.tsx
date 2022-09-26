@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
-import { useMemo, useContext, useState, useEffect } from 'react'
-import { container } from 'inversify-hooks-esm'
+import { useContext, useState /*, useEffect */ } from 'react'
+// import { useContainerGet } from 'inversify-hooks-esm'
 import { object, string, array } from 'yup'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 
 // @ts-ignore
 // import { Datepicker } from 'flowbite-datepicker'
-import { Select, Label } from 'flowbite-react'
+import { Select /*, Label */ } from 'flowbite-react'
 
 import { ContextPageQurbanRegistrations } from 'contexts'
 
 import { addRefProps, PropsWithInnerRef } from "utils"
-import {
-  IControllerCoreHandleSubmit,
-  CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
-} from 'controllers'
+// import {
+//   IControllerCoreHandleSubmit,
+//   CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
+// } from 'controllers'
 
-import { IModelQurbanEventWithID, IModelQurbanRegistrationRequestBody, IModelSacrificialAnimalWithId } from "models"
+import { /* IModelQurbanEventWithID, */ IModelQurbanRegistrationRequestBody, IModelSacrificialAnimalWithId } from "models"
 import { getQurbanEventId } from 'state-management'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -28,18 +28,17 @@ export interface ComponentOrganismFormQurbanRegistrationAddBaseProps
 export const ComponentOrganismFormQurbanRegistrationAddBase = <
   InputType extends IModelQurbanRegistrationRequestBody = IModelQurbanRegistrationRequestBody,
   PropType extends ComponentOrganismFormQurbanRegistrationAddBaseProps = ComponentOrganismFormQurbanRegistrationAddBaseProps,
-  OutputType extends IModelQurbanEventWithID = IModelQurbanEventWithID,
+  // OutputType extends IModelQurbanEventWithID = IModelQurbanEventWithID,
   SacrificialAnimalType extends IModelSacrificialAnimalWithId = IModelSacrificialAnimalWithId
 >({ innerRef }: PropType) => {
   const { toggleMode, sacrificialAnimalsData } = useContext(ContextPageQurbanRegistrations)
   const qurbanEventId = useSelector(getQurbanEventId)
-  const router = useRouter()
-  const qurbanRegistrationAddCtrl = useMemo(() =>
-    container.get<IControllerCoreHandleSubmit<InputType, OutputType>>(
-      CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
-    ), [])
+  // const router = useRouter()
+  // const qurbanRegistrationAddCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType, OutputType>>(
+  //   CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
+  // )
   const [selectedSacrificialAnimal, setSelectedSacrificialAnimal] = useState<SacrificialAnimalType | null>(null)
-  const [triggerUpdateMaxParticipants, setTriggerUpdateMaxParticipants] = useState(false)
+  // const [triggerUpdateMaxParticipants, setTriggerUpdateMaxParticipants] = useState(false)
   const initialValue: InputType = {
     sacrificialAnimalId: sacrificialAnimalsData?.[0]?.id ?? null,
     qurbanEventId,
@@ -54,6 +53,7 @@ export const ComponentOrganismFormQurbanRegistrationAddBase = <
     .required()
     .defined()
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmit = async (input: InputType, helpers: FormikHelpers<InputType>) => {
     try {
       console.log(input)

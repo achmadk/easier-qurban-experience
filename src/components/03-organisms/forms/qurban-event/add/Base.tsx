@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
-import { useMemo, useRef, useContext } from 'react'
-import { container } from 'inversify-hooks-esm'
+import { useRef, useContext } from 'react'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { object, string, number } from 'yup'
+import { useRouter } from 'next/router'
 // @ts-ignore
 // import { Datepicker } from 'flowbite-datepicker'
 
@@ -15,7 +16,6 @@ import {
 } from 'controllers'
 
 import { IModelQurbanEventBase, IModelQurbanEventWithID } from "models"
-import { useRouter } from 'next/router'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ComponentOrganismFormQurbanEventAddBaseProps
@@ -29,11 +29,10 @@ export const ComponentOrganismFormQurbanEventAddBase = <
   const { toggleMode } = useContext(ContextPageQurbanEvents)
   const router = useRouter()
   const dateExecutionRef = useRef<HTMLInputElement>()
-  const qurbanEventAddCtrl = useMemo(() =>
-    container.get<IControllerCoreHandleSubmit<InputType, OutputType>>(
+
+  const qurbanEventAddCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType, OutputType>>(
       CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
     )
-  , [])
   const initialValue: InputType = {
     yearExecution: (new Date()).getFullYear(),
     dateExecution: null,

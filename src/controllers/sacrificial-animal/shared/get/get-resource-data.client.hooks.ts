@@ -1,4 +1,4 @@
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { useState } from "react";
 import { AxiosInstance } from 'axios';
 
@@ -15,7 +15,7 @@ export function useControllerSacrificialAnimalSharedGetResourceDataClient<
 >(): IControllerCoreGetResourceData<DataType[], null | undefined> {
   const [data, setData] = useState<DataType[] | null>(null)
 
-  const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
+  const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
 
   const getData = async () => {
     const response = await remoteService.get<{ data: DataType[] }>('/sacrificial_animals')

@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 
+import { Provider as ReactReduxProvider } from 'react-redux'
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs'
 import { ToastContainer } from 'react-toastify'
+import { ContainerProvider } from 'inversify-hooks-esm'
 
 import { bindDependencyInjectionMethods } from 'dependency-injection'
 
@@ -18,40 +21,42 @@ const publicRoutes = [
   '/'
 ]
 
-bindDependencyInjectionMethods()
-
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, ...rest }: AppProps) {
+  const { store, props } = wrapper.useWrappedStore(rest)
   const { pathname } = useRouter()
+  const container = useMemo(() => bindDependencyInjectionMethods(), [])
 
   const isPublicPage = publicRoutes.includes(pathname)
   return (
-    <>
-      <Head>
-        <title>Easier Qurban Experience (EQExp)</title>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <ToastContainer
-        position="top-center"
-      />
-      <ClerkProvider {...pageProps}>
-        {isPublicPage ? (
-          <Component {...pageProps} />
-        ) : (
-          <>
-            <SignedIn>
-              <Component {...pageProps} />
-            </SignedIn>
-            <SignedOut>
-              <RedirectToSignIn />
-            </SignedOut>
-          </>
-        )}
-      </ClerkProvider>
-    </>
+    <ContainerProvider value={container}>
+      <ReactReduxProvider store={store}>
+        <Head>
+          <title>Easier Qurban Experience (EQExp)</title>
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <ToastContainer
+          position="top-center"
+        />
+        <ClerkProvider {...props.pageProps}>
+          {isPublicPage ? (
+            <Component {...props.pageProps} />
+          ) : (
+            <>
+              <SignedIn>
+                <Component {...props.pageProps} />
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          )}
+        </ClerkProvider>
+      </ReactReduxProvider>
+    </ContainerProvider>
   )
 }
 
-export default wrapper.withRedux(MyApp)
+export default MyApp

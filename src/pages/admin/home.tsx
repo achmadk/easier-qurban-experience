@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useUser } from '@clerk/nextjs'
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { usePopper } from 'react-popper'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
@@ -25,14 +25,12 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
   const { user } = useUser()
   const router = useRouter()
   const dispatch = useDispatch()
-  const logoutCtrl = container.get<IControllerCoreLogout>(
+  const logoutCtrl = useContainerGet<IControllerCoreLogout>(
     CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
   )
-  // const mosqueRegisterCtrl = useMemo(() =>
-  //   container.get<IControllerCoreHandleSubmit<InputType>>(
+  // const mosqueRegisterCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType>>(
   //     CONTROLLER_MOSQUE_ADMIN_REGISTER_HANDLE_SUBMIT_CLIENT
   //   )
-  // , [])
 
   const referenceEl = useRef<HTMLAnchorElement>(null)
   const dropdownEl = useRef<HTMLDivElement>(null)
