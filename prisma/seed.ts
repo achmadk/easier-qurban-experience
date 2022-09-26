@@ -44,6 +44,37 @@ async function main() {
       }
     })
   }
+  const storedSacrificialAnimals = await prisma.sacrificialAnimals.findMany()
+  if (storedSacrificialAnimals.length === 0) {
+    await prisma.sacrificialAnimals.createMany({
+      data: [
+        {
+          name: 'Sheep',
+          code: 'SHEEP',
+          maximalUser: 1,
+          minimalAge: 6
+        },
+        {
+          name: 'Goat',
+          code: 'GOAT',
+          maximalUser: 1,
+          minimalAge: 12
+        },
+        {
+          name: 'Cow',
+          code: 'COW',
+          maximalUser: 7,
+          minimalAge: 24
+        },
+        {
+          name: 'Camel',
+          code: 'CAMEL',
+          maximalUser: 10,
+          minimalAge: 60
+        }
+      ]
+    })
+  }
 }
 
 (async () => {

@@ -76,7 +76,9 @@ const TableAdminCitizensBase = <
               </tr>
             </thead>
             <tbody>
-              {usedData.map((item, index) => (
+              {usedData
+                .slice(0, 10)
+                .map((item, index) => (
                 <tr key={`citizen-item-${index}`}>
                   <th
                     className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
@@ -95,6 +97,18 @@ const TableAdminCitizensBase = <
             </tbody>
           </table>
         </div>
+        {usedData.length > 10 && (
+          <div className="rounded-b mb-0 px-4 py-3 border-0">
+            <div className="flex flex-wrap items-center">
+              <div
+                className="relative w-full px-4 max-w-full flex-grow flex-1">
+                <h3 className="font-semibold text-base text-blueGray-700">
+                  {`and ${usedData.length - 10} items more`}
+                </h3>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

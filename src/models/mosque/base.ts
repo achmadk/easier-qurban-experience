@@ -1,4 +1,4 @@
-import { IUserBase } from "models"
+import { IModelCoreOnlyID, IUserBase } from "models"
 
 export interface IMosqueBase {
   name: string
@@ -12,6 +12,5 @@ export type IMosqueWithUser<
   user: UserType
 }
 
-export interface IMosqueWithID extends IMosqueBase {
-  id: string
-}
+export interface IMosqueWithID
+  extends IMosqueBase, IModelCoreOnlyID {}

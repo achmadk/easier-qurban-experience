@@ -1,4 +1,4 @@
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { AxiosInstance } from 'axios'
 import { FormikHelpers } from 'formik'
 import { toast } from 'react-toastify';
@@ -13,8 +13,8 @@ export function useControllerMosqueAdminRegisterHandleSubmitClient<
   InputType extends IMosqueBase = IMosqueBase,
   OutputType extends IMosqueWithID = IMosqueWithID
 >(): IControllerCoreHandleSubmit<InputType, OutputType | null> {
-  const mosqueRegistrationCtrl = container.get<IControllerMosqueAdminRegisterTransformRequestBodyClient<InputType>>(CONTROLLER_MOSQUE_ADMIN_REGISTER_TRANSFORM_REQUEST_BODY_CLIENT)
-  const remoteService = container.get<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
+  const mosqueRegistrationCtrl = useContainerGet<IControllerMosqueAdminRegisterTransformRequestBodyClient<InputType>>(CONTROLLER_MOSQUE_ADMIN_REGISTER_TRANSFORM_REQUEST_BODY_CLIENT)
+  const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
 
   const handleSubmit = async (initialInput: InputType, { setSubmitting }: FormikHelpers<InputType>) => {
     setSubmitting(true)

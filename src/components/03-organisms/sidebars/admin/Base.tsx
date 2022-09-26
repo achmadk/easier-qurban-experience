@@ -1,11 +1,12 @@
 import { type MouseEvent, useRef } from "react"
 import { useSelector } from "react-redux"
-import { container } from 'inversify-hooks-esm'
+import { useContainerGet } from 'inversify-hooks-esm'
 import { useUser } from '@clerk/nextjs'
 import { createPopper } from '@popperjs/core'
 
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
+import Image from 'next/future/image'
 
 import { addRefProps, PropsWithInnerRef } from "utils"
 import { getMosqueID } from "state-management"
@@ -24,7 +25,7 @@ const SidebarAdminBase = <
   const { user } = useUser()
   const collapseSidebarRef = useRef<HTMLDivElement>()
 
-  const logoutCtrl = container.get<IControllerCoreLogout>(
+  const logoutCtrl = useContainerGet<IControllerCoreLogout>(
     CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
   )
 
@@ -82,7 +83,8 @@ const SidebarAdminBase = <
                       alt={`${user.fullName} Profile Image URL`}
                       className="w-full rounded-full align-middle border-none shadow-lg"
                       src={user.profileImageUrl}
-                      layout='fill'
+                      width={48}
+                      height={48}
                     />
                   </span>
                 </div>
