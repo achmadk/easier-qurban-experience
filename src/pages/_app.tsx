@@ -40,7 +40,7 @@ function MyApp({ Component, ...rest }: AppProps) {
         <ToastContainer
           position="top-center"
         />
-        <ClerkProvider {...props.pageProps}>
+        <ClerkProvider frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API} {...props.pageProps}>
           {isPublicPage ? (
             <Component {...props.pageProps} />
           ) : (

@@ -8,6 +8,7 @@ export * from './mosque'
 export * from './qurban-citizen'
 export * from './qurban-committee'
 export * from './qurban-event'
+export * from './qurban-registration'
 
 export * from './sacrificial-animal'
 

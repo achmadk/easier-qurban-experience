@@ -55,7 +55,7 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           * to qurban committees page when ready
           * <-- [START] -->
           */}
-        {/* <li className="items-center">
+        <li className="items-center">
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`}>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/qurban_registrations`)}>
@@ -73,7 +73,7 @@ const ListSidebarAdminQurbanEventNavigationBase = <
             </a>
           </Link>
         </li>
-        <li className="items-center">
+        {/* <li className="items-center">
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/reports`}>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/reports`)}>
