@@ -1382,7 +1382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@clerk/nextjs@npm:^4.5.4":
+"@clerk/nextjs@npm:^4.3.2":
   version: 4.5.4
   resolution: "@clerk/nextjs@npm:4.5.4"
   dependencies:
@@ -4793,7 +4793,7 @@ __metadata:
   resolution: "easier-qurban-experience@workspace:."
   dependencies:
     "@abraham/reflection": ^0.11.0
-    "@clerk/nextjs": ^4.5.4
+    "@clerk/nextjs": ^4.3.2
     "@commitlint/cli": ^17.1.2
     "@commitlint/config-conventional": ^17.1.0
     "@fortawesome/fontawesome-svg-core": ^6.2.0
