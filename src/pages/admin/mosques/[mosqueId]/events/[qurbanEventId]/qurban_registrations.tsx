@@ -18,6 +18,7 @@ import {
   useControllerMosqueAdminFindGetDataClient,
   useControllerQurbanCitizenAdminFindGetResourceDataClient,
   useControllerQurbanEventAdminFindGetResourceDataClient,
+  useControllerQurbanRegistrationAdminFindGetResourceDataClient,
   useControllerSacrificialAnimalSharedGetResourceDataClient
 } from 'controllers'
 
@@ -44,6 +45,8 @@ export default function AdminMosqueIDQurbanRegistrations<
     useControllerQurbanCitizenAdminFindGetResourceDataClient()
   const { data: sacrificialAnimalsData, getData: getSacrificialAnimalsData } =
     useControllerSacrificialAnimalSharedGetResourceDataClient()
+  const { data: qurbanRegistrationsData, getData: getQurbanRegistrationData } =
+    useControllerQurbanRegistrationAdminFindGetResourceDataClient()
 
   const paramsIsReady = checkParamsIsReady(props)
 
@@ -51,6 +54,7 @@ export default function AdminMosqueIDQurbanRegistrations<
     await getMosqueData({ mosqueId })
     await getQurbanEventsData({ mosqueId, qurbanEventId })
     await getQurbanCitizensData(qurbanEventId)
+    await getQurbanRegistrationData(qurbanEventId)
     await getSacrificialAnimalsData()
   }
 
@@ -66,6 +70,8 @@ export default function AdminMosqueIDQurbanRegistrations<
     toggleMode,
     qurbanCitizensData,
     sacrificialAnimalsData,
+    setTriggerLoadData,
+    qurbanRegistrationsData
   }
 
   useEffect(() => {
