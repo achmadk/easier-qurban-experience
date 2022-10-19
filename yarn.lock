@@ -2198,31 +2198,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@prisma/client@npm:4.4.0"
+"@prisma/client@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@prisma/client@npm:4.5.0"
   dependencies:
-    "@prisma/engines-version": 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
+    "@prisma/engines-version": 4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 7ecd1dbfd7158baef5365beaead3d863841812cd939b7b1f5287f163281119de311ffdeb422d1105b15c939b50ca3760bb459ede63a34d5f7acda510d7c30b03
+  checksum: 1e6b76c104f17e6fc78c537d17879a17dcde8443cd6d084530068453c4f2620050c273f5683d7cdb5012a0d5b4854907fe993fcf5752fb11f2bcca7221d34e59
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6":
-  version: 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
-  resolution: "@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6"
-  checksum: 91ca927a69f53ffd05ee02b25666531997202642dbe92ae2c6df6a28a38726894e3728377c49d2327a323461d92f5b7eedae0795ab6ca50ed59ae28c2775b38a
+"@prisma/engines-version@npm:4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452":
+  version: 4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452
+  resolution: "@prisma/engines-version@npm:4.5.0-43.0362da9eebca54d94c8ef5edd3b2e90af99ba452"
+  checksum: 619626ff5dc16a292065a5318f76653f589bf170a769edbabb07d62b4a589ab0eba287a00faf3e31eaf3280c99662e210376a61a68f91b7690a955fd43f346eb
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:4.4.0":
-  version: 4.4.0
-  resolution: "@prisma/engines@npm:4.4.0"
-  checksum: e5a62e6c905cbe325f8aa15afe698f8a0a47fe7fdc4d4affdc8df86fcdc6fdd2857ac498611217daf5f8304846a32e199d100165c748b4e8a959bbf0670507a1
+"@prisma/engines@npm:4.5.0":
+  version: 4.5.0
+  resolution: "@prisma/engines@npm:4.5.0"
+  checksum: d34ba4ceee67809b4a6d756763b118b3fbf273ab35378e568495248c7c62633c4cccca1e6b94411d5312a272f268f3dec5e8ae0a3e4177ad5f593f38daca7c58
   languageName: node
   linkType: hard
 
@@ -2532,10 +2532,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.11.0":
-  version: 18.11.0
-  resolution: "@types/node@npm:18.11.0"
-  checksum: f27f899ab428e5732f04fadadc9203f44bdf3abf56474540ee27da90e4f2ba133faf87263cada4d2271955f92ee6a142bd50683c86290fe5070c19aac44fd654
+"@types/node@npm:*, @types/node@npm:^18.11.2":
+  version: 18.11.2
+  resolution: "@types/node@npm:18.11.2"
+  checksum: 0ff5c90fb9ab653e018b858479aea4d2f763b07b31f9502383d408936f525ca37cac82ea27774a0dd0356ff9badba2792a6a3fff94f79fd7c82ee2a892c43ed5
   languageName: node
   linkType: hard
 
@@ -2547,9 +2547,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^16.11.55":
-  version: 16.11.66
-  resolution: "@types/node@npm:16.11.66"
-  checksum: bf190db14d1f32ab10588dd1a1e30bb2e9ba9b78281fce7a81fa80d914f9b3203d48cf1c6a8f96ef6b0edbba281478d2c68d6ebb7719c896f2dd62429c64ef09
+  version: 16.11.68
+  resolution: "@types/node@npm:16.11.68"
+  checksum: a35293b6b8867e10ab9e10b6cd5f0e4224a86256d5ef102581dcb9f79f35f255ad87443e8584ddf8dce1229ee28885c58187e41822cf8d1e82495e7897c47c3f
   languageName: node
   linkType: hard
 
@@ -3704,9 +3704,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001400, caniuse-lite@npm:^1.0.30001406, caniuse-lite@npm:^1.0.30001407":
-  version: 1.0.30001420
-  resolution: "caniuse-lite@npm:1.0.30001420"
-  checksum: dfa5027b2aeaba3ab1731735a46aecf62f286cdeec7f8ccb0f8cce0a3d02447e640e944d9bf5d9ea98b53fac6c2b168bb18f4c9ad598d92a2da7b05e2aea06e2
+  version: 1.0.30001421
+  resolution: "caniuse-lite@npm:1.0.30001421"
+  checksum: acde5d9ea9e380bf04099d3d11a80c9a4f372af1f4094031b8dfc53f362707fd72e6b9703ca6086563cb4b64d8f0e4c30b85be3679227d32f6c511fc2b8e2e6c
   languageName: node
   linkType: hard
 
@@ -4594,10 +4594,10 @@ __metadata:
     "@linaria/shaker": ^4.2.2
     "@linaria/webpack-loader": ^4.1.5
     "@popperjs/core": ^2.11.6
-    "@prisma/client": ^4.4.0
+    "@prisma/client": ^4.5.0
     "@reduxjs/toolkit": ^1.8.6
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^18.11.0
+    "@types/node": ^18.11.2
     "@types/react": ^18.0.21
     "@typescript-eslint/eslint-plugin": ^5.40.1
     add: ^2.0.6
@@ -4632,7 +4632,7 @@ __metadata:
     postcss: ^8.4.18
     postcss-import: ^15.0.0
     prettier: ^2.7.1
-    prisma: ^4.4.0
+    prisma: ^4.5.0
     purge-fontawesome: ^1.1.1
     react: 18.2.0
     react-dom: 18.2.0
@@ -4640,7 +4640,7 @@ __metadata:
     react-popper: ^2.3.0
     react-redux: ^8.0.4
     react-toastify: ^9.0.8
-    read-excel-file: ^5.5.1
+    read-excel-file: ^5.5.2
     sass: ^1.55.0
     tailwindcss: ^3.1.8
     ts-node: ^10.9.1
@@ -4687,9 +4687,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.251":
-  version: 1.4.283
-  resolution: "electron-to-chromium@npm:1.4.283"
-  checksum: b005cdac737cecd0e7f875263b97da13ad914526f4e31b4051dd0179b82ccd4aff27b4a3e3a7814cbc1774efd73956f830ae7f6ef28b313175857c26928d80b5
+  version: 1.4.284
+  resolution: "electron-to-chromium@npm:1.4.284"
+  checksum: be496e9dca6509dbdbb54dc32146fc99f8eb716d28a7ee8ccd3eba0066561df36fc51418d8bd7cf5a5891810bf56c0def3418e74248f51ea4a843d423603d10a
   languageName: node
   linkType: hard
 
@@ -6492,11 +6492,11 @@ __metadata:
   linkType: hard
 
 "is-core-module@npm:^2.5.0, is-core-module@npm:^2.8.1, is-core-module@npm:^2.9.0":
-  version: 2.10.0
-  resolution: "is-core-module@npm:2.10.0"
+  version: 2.11.0
+  resolution: "is-core-module@npm:2.11.0"
   dependencies:
     has: ^1.0.3
-  checksum: 0f3f77811f430af3256fa7bbc806f9639534b140f8ee69476f632c3e1eb4e28a38be0b9d1b8ecf596179c841b53576129279df95e7051d694dac4ceb6f967593
+  checksum: f96fd490c6b48eb4f6d10ba815c6ef13f410b0ba6f7eb8577af51697de523e5f2cd9de1c441b51d27251bf0e4aebc936545e33a5d26d5d51f28d25698d4a8bab
   languageName: node
   linkType: hard
 
@@ -8818,15 +8818,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "prisma@npm:4.4.0"
+"prisma@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "prisma@npm:4.5.0"
   dependencies:
-    "@prisma/engines": 4.4.0
+    "@prisma/engines": 4.5.0
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: fb44f8b36d59c411711b2f5cecbe112a6487c387a7dd7ade350c73c0e9f821dfdb30cd6271c2f2b9b713fda3a31eec4b241c482754b26bfcb6df831ba521a58e
+  checksum: 83a6d28475a31e8d69b355f949c0484b6d64324c45c452c57bf9ed50f85129b8df22fecb671c00a28f0cb80360a3f691888c463548949e94078f7f9be4bd0c79
   languageName: node
   linkType: hard
 
@@ -9136,14 +9136,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"read-excel-file@npm:^5.5.1":
-  version: 5.5.1
-  resolution: "read-excel-file@npm:5.5.1"
+"read-excel-file@npm:^5.5.2":
+  version: 5.5.2
+  resolution: "read-excel-file@npm:5.5.2"
   dependencies:
     "@xmldom/xmldom": ^0.8.2
     fflate: ^0.7.3
     unzipper: ^0.10.11
-  checksum: 338473ebbe0bc73ba3939f858488ea758a02f763e27a24e3be50f24cdd441a70e26be8b6e238d2c38641af4e6efd1818930407808d5eecf04f443231c9464439
+  checksum: 470ba3fe4f3d0831cb149b917ca3301f7450db0f3f9558146ac6ef152ae269ac02d38259a9af019665dd299ae6615a5dd8df541cd63ef1bf5bc1666a6fd42c97
   languageName: node
   linkType: hard
 
