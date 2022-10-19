@@ -40,7 +40,10 @@ export function useControllerQurbanEventAdminFindGetResourceDataClient<
     const response = await remoteService.get<{ data: DataType[] }>('/qurban_events', { params: { query }})
     const data = response?.data?.data ?? []
     if (qurbanEventId && qurbanEventDataIsEmpty) {
-      dispatch(setQurbanEventData(data[0]))
+      const selectedQurbanEventData = data?.find((item) =>
+        item.id === qurbanEventId
+      ) ?? null
+      dispatch(setQurbanEventData(selectedQurbanEventData))
     }
     setData(data)
   }
