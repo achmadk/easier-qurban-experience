@@ -12,7 +12,7 @@ import { ListSidebarAdminQurbanEventNavigation } from 'components/02-molecules/l
 import { TableAdminQurbanCitizens } from 'components/03-organisms/tables/admin/qurban-citizens/Base'
 import { TableAdminQurbanRegistration } from 'components/03-organisms/tables/admin/qurban-registrations/Base'
 
-import { useControllerCoreRouterIsParamsReady, useControllerMosqueAdminFindGetDataClient, useControllerQurbanCitizenAdminFindGetResourceDataClient, useControllerQurbanCommitteeAdminGetResourceDataClient, useControllerQurbanEventAdminFindGetResourceDataClient } from 'controllers'
+import { useControllerCoreRouterIsParamsReady, useControllerMosqueAdminFindGetDataClient, useControllerQurbanCitizenAdminFindGetResourceDataClient, useControllerQurbanCommitteeAdminGetResourceDataClient, useControllerQurbanEventAdminFindGetResourceDataClient, useControllerQurbanRegistrationAdminFindGetResourceDataClient } from 'controllers'
 
 import { IRouteCoreMosqueBase, IRouteCoreMosqueEventBase } from 'routes'
 import { IModelQurbanEventWithID } from 'models'
@@ -37,6 +37,8 @@ export default function AdminMosqueEventID<
     useControllerQurbanCitizenAdminFindGetResourceDataClient()
   const { data: qurbanCommitteesData, getData: getQurbanCommitteesData } =
     useControllerQurbanCommitteeAdminGetResourceDataClient()
+  const { data: qurbanRegistrationData, getData: getQurbanRegistrationData } =
+    useControllerQurbanRegistrationAdminFindGetResourceDataClient()
 
   const paramsIsReady = checkParamsIsReady(props)
 
@@ -46,6 +48,7 @@ export default function AdminMosqueEventID<
       mosqueId: props.mosqueId,
       qurbanEventId: props.qurbanEventId
     })
+    await getQurbanRegistrationData(props.qurbanEventId)
     await getQurbanCitizenData(props.qurbanEventId)
     await getQurbanCommitteesData(props.mosqueId)
   }
@@ -93,7 +96,7 @@ export default function AdminMosqueEventID<
                                 Qurban Registration
                               </h5>
                               <span className="font-semibold text-xl text-blueGray-700">
-                                {qurbanCitizenData?.length ?? 0}
+                                {qurbanRegistrationData?.length ?? 0}
                               </span>
                             </div>
                             <div className="relative w-auto pl-4 flex-initial">
@@ -166,7 +169,7 @@ export default function AdminMosqueEventID<
             </div>
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <div className="flex flex-wrap mt-4">
-                <TableAdminQurbanRegistration />
+                <TableAdminQurbanRegistration data={qurbanRegistrationData} />
                 <TableAdminQurbanCitizens data={qurbanCitizenData} />
                 <TableAdminQurbanCommittees data={qurbanCommitteesData} />
               </div>
