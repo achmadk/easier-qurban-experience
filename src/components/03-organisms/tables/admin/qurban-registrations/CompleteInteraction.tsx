@@ -14,16 +14,23 @@ const TableAdminQurbanRegistrationCompleteInteractionBase = <
   DataType extends IModelQurbanRegistrationWithID = IModelQurbanRegistrationWithID,
   PropType extends TableAdminQurbanRegistrationCompleteInteractionBaseProps = TableAdminQurbanRegistrationCompleteInteractionBaseProps
 >({ innerRef }: PropType) => {
-  const { toggleMode, qurbanRegistrationsData } = useContext(ContextPageQurbanRegistrations)
+  const { toggleMode, qurbanRegistrationsData, setSelectedQurbanRegistrationData } = useContext(ContextPageQurbanRegistrations)
   const emptyData = useMemo(() => ([{
     id: null,
     participants: []
   }] as DataType[]), [])
 
-  const usedData = qurbanRegistrationsData?.length > 0 ? qurbanRegistrationsData : emptyData
+  const usedData = (qurbanRegistrationsData?.length > 0 ? qurbanRegistrationsData : emptyData) as DataType[]
 
   const handleButtonAddClicked = () =>
     toggleMode('CREATE')
+
+  const handleTableItemClicked = (data: DataType) => () => {
+    if (data.id !== null) {
+      toggleMode('UPDATE')
+      setSelectedQurbanRegistrationData(data)
+    }
+  }
 
   return (
     <div ref={innerRef} className="w-full px-4">
@@ -65,7 +72,10 @@ const TableAdminQurbanRegistrationCompleteInteractionBase = <
             </thead>
             <tbody>
               {usedData.map((data, index) => (
-                <tr key={`qurban-registration-item-${index}`}>
+                <tr
+                  key={`qurban-registration-item-${index}`}
+                  className="cursor-pointer hover:text-blue-600"
+                  onClick={handleTableItemClicked(data)}>
                   <th
                     className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                     {data?.sacrificialAnimal?.name ?? '-'}

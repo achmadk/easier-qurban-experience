@@ -8,10 +8,10 @@ import { SERVICE_CORE_REMOTE_BASE } from 'services';
 import { IControllerCoreHandleSubmit, useControllerCoreEncryptionTransformRequestBodyBaseClient } from "controllers/core";
 import { IModelQurbanRegistrationRequestBody } from 'models';
 
-export const CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
-  = 'ControllerQurbanEventRegistrationAdminAddHandleSubmitClient'
+export const CONTROLLER_QURBAN_REGISTRATION_ADMIN_UPDATE_HANDLE_SUBMIT_CLIENT
+  = 'ControllerQurbanEventRegistrationAdminUpdateHandleSubmitClient'
 
-export function useControllerQurbanRegistrationAdminAddHandleSubmitClient<
+export function useControllerQurbanRegistrationAdminUpdateHandleSubmitClient<
   InputType extends IModelQurbanRegistrationRequestBody = IModelQurbanRegistrationRequestBody
 >(): IControllerCoreHandleSubmit<InputType> {
   const remoteService = useContainerGet<AxiosInstance>(SERVICE_CORE_REMOTE_BASE)
@@ -22,13 +22,14 @@ export function useControllerQurbanRegistrationAdminAddHandleSubmitClient<
   const handleSubmit = async (input: InputType, { setSubmitting }: FormikHelpers<InputType>) => {
     setSubmitting(true)
     try {
+      console.log(input)
       const data = await transformRequestBody(input)
       await toast.promise(
-        remoteService.post('/qurban_registrations', { data }),
+        remoteService.put('/qurban_registrations', { data }),
         {
-          pending: 'Loading add qurban registration...',
-          success: `Successfully add qurban registration.`,
-          error: `Error add qurban registration`
+          pending: 'Loading update qurban registration...',
+          success: `Successfully update qurban registration.`,
+          error: `Error update qurban registration`
         }
       )
     } finally {

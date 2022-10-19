@@ -23,6 +23,7 @@ import {
 } from 'controllers'
 
 import { IRouteCoreMosqueBase } from 'routes'
+import { IModelQurbanRegistrationWithID } from 'models'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface AdminMosqueIDQurbanRegistrationsProps extends IRouteCoreMosqueBase {
@@ -30,10 +31,16 @@ export interface AdminMosqueIDQurbanRegistrationsProps extends IRouteCoreMosqueB
 }
 
 export default function AdminMosqueIDQurbanRegistrations<
-  PropType extends AdminMosqueIDQurbanRegistrationsProps = AdminMosqueIDQurbanRegistrationsProps
+  PropType extends AdminMosqueIDQurbanRegistrationsProps = AdminMosqueIDQurbanRegistrationsProps,
+  QurbanRegistrationDataType extends IModelQurbanRegistrationWithID = IModelQurbanRegistrationWithID
 >(props: PropType) {
-  const [mode, setMode] = useState<'VIEW' | 'CREATE'>('VIEW')
+  const [mode, setMode] = useState<'VIEW' | 'CREATE' | 'UPDATE'>('VIEW')
+  const [selectedQurbanRegistrationData, setSelectedQurbanRegistrationData] = useState<QurbanRegistrationDataType | null>(null)
   const [triggerLoadData, setTriggerLoadData] = useState(false)
+  const [
+    triggerLoadQurbanRegistrationData,
+    setTriggerLoadQurbanRegistrationData
+  ] = useState(false)
   const { checkValidCondition: checkParamsIsReady } =
     useControllerCoreRouterIsParamsReady<PropType>()
 
@@ -46,7 +53,7 @@ export default function AdminMosqueIDQurbanRegistrations<
   const { data: sacrificialAnimalsData, getData: getSacrificialAnimalsData } =
     useControllerSacrificialAnimalSharedGetResourceDataClient()
   const { data: qurbanRegistrationsData, getData: getQurbanRegistrationData } =
-    useControllerQurbanRegistrationAdminFindGetResourceDataClient()
+    useControllerQurbanRegistrationAdminFindGetResourceDataClient<QurbanRegistrationDataType>()
 
   const paramsIsReady = checkParamsIsReady(props)
 
@@ -58,11 +65,8 @@ export default function AdminMosqueIDQurbanRegistrations<
     await getSacrificialAnimalsData()
   }
 
-  const toggleMode = (value?: 'CREATE' | 'VIEW') => {
-    setMode((prevValue) => ['CREATE', 'VIEW'].includes(value)
-      ? value
-      : prevValue === 'CREATE' ? 'VIEW' : 'CREATE'
-    )
+  const toggleMode = (value?: 'CREATE' | 'VIEW' | 'UPDATE') => {
+    setMode(value ?? 'VIEW')
   }
 
   const contextValue = {
@@ -70,8 +74,10 @@ export default function AdminMosqueIDQurbanRegistrations<
     toggleMode,
     qurbanCitizensData,
     sacrificialAnimalsData,
-    setTriggerLoadData,
-    qurbanRegistrationsData
+    setTriggerLoadData: setTriggerLoadQurbanRegistrationData,
+    qurbanRegistrationsData,
+    selectedQurbanRegistrationData,
+    setSelectedQurbanRegistrationData,
   }
 
   useEffect(() => {
@@ -89,6 +95,14 @@ export default function AdminMosqueIDQurbanRegistrations<
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerLoadData])
 
+  useEffect(() => {
+    if (triggerLoadQurbanRegistrationData) {
+      getQurbanRegistrationData(props.qurbanEventId)
+      setTriggerLoadQurbanRegistrationData(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [triggerLoadQurbanRegistrationData])
+
   return (
     <>
       {/** @ts-ignore */}
@@ -105,7 +119,7 @@ export default function AdminMosqueIDQurbanRegistrations<
             <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12" />
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <div className="flex flex-wrap mt-4">
-                { mode === 'CREATE' && <ComponentOrganismFormQurbanRegistrationAdd />}
+                { ['CREATE', 'UPDATE'].includes(mode) && <ComponentOrganismFormQurbanRegistrationAdd />}
                 { mode === 'VIEW' && <TableAdminQurbanRegistrationCompleteInteraction />}
               </div>
               <FooterAdmin />
