@@ -28,7 +28,7 @@ const HeaderBase = ({ innerRef }: PropsWithInnerRef) => {
     <header ref={innerRef}>
       <nav className="items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6">
         <div className="flex justify-between">
-          <Link href="/">
+          <Link href="/" legacyBehavior>
             <a>
               EQExp App
             </a>

@@ -4,8 +4,8 @@ import { useUser } from '@clerk/nextjs'
 import { createPopper } from '@popperjs/core'
 import { useSelector } from 'react-redux'
 
-// import Image from 'next/image'
-import Image from 'next/future/image'
+import Image from 'next/image'
+// import Image from 'next/future/image'
 import Link from 'next/link'
 
 import { CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT, IControllerCoreLogout } from 'controllers'
@@ -60,7 +60,7 @@ const HeaderMosqueBase = <
           <div
             className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
             <div className="flex items-center" style={{ columnGap: '0.5rem' }}>
-              <Link href={`/admin/mosques/${mosqueId}`}>
+              <Link href={`/admin/mosques/${mosqueId}`} legacyBehavior>
                 <a
                   className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                   {`${mosqueName ?? '-'}${headerType === 'DASHBOARD' ? ` - Dashboard` : ''}`}
@@ -72,7 +72,7 @@ const HeaderMosqueBase = <
                 </span>
               )}
               {headerType === 'CITIZENS' && (
-                <Link href={`/admin/mosques/${mosqueId}/citizens`}>
+                <Link href={`/admin/mosques/${mosqueId}/citizens`} legacyBehavior>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                     Citizens
@@ -80,7 +80,7 @@ const HeaderMosqueBase = <
                 </Link>
               )}
               {headerType === 'QURBAN_EVENTS' && (
-                <Link href={`/admin/mosques/${mosqueId}/events`}>
+                <Link href={`/admin/mosques/${mosqueId}/events`} legacyBehavior>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                     Qurban Events
@@ -88,7 +88,7 @@ const HeaderMosqueBase = <
                 </Link>
               )}
               {['SPECIFIED_QURBAN_EVENT', 'QURBAN_EVENT_CITIZENS', 'QURBAN_EVENT_REGISTRATION'].includes(headerType) && (
-                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}`}>
+                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}`} legacyBehavior>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                     {qurbanEventYearExecution ? `${qurbanEventYearExecution} Qurban Event` : ''}
@@ -101,7 +101,7 @@ const HeaderMosqueBase = <
                 </span>
               )}
               {headerType === 'QURBAN_EVENT_CITIZENS' && (
-                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`}>
+                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`} legacyBehavior>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                     Qurban Citizens
@@ -109,7 +109,7 @@ const HeaderMosqueBase = <
                 </Link>
               )}
               {headerType === 'QURBAN_EVENT_REGISTRATION' && (
-                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`}>
+                <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`} legacyBehavior>
                   <a
                     className="text-sm text-white uppercase hidden lg:inline-block font-semibold hover:underline">
                     Qurban Registration

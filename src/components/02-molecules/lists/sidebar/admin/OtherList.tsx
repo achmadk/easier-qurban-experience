@@ -20,7 +20,7 @@ const ListSidebarAdminOtherListBase = <
         ref={innerRef}
         className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li className="items-center">
-            <Link href="/admin/home">
+            <Link href="/admin/home" legacyBehavior>
               <a
                 className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold flex">
                 <i className="fas fa-home text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />

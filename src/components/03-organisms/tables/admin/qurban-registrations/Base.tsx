@@ -2,11 +2,11 @@ import { type HTMLAttributes, useMemo } from 'react'
 /**
  * @todo add link to qurban registration if the page is ready
  */
-// import { useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
-// import Link from 'next/link'
+import Link from 'next/link'
 
-// import { getMosqueID, getQurbanEventId } from "state-management"
+import { getMosqueID, getQurbanEventId } from "state-management"
 
 import { addRefProps, PropsWithInnerRef } from "utils"
 import { IModelQurbanRegistrationWithID } from 'models'
@@ -31,8 +31,8 @@ const TableAdminQurbanRegistrationBase = <
   /**
    * @todo add link to qurban registration if the page is ready
    */
-  // const mosqueId = useSelector(getMosqueID)
-  // const qurbanEventId = useSelector(getQurbanEventId)
+  const mosqueId = useSelector(getMosqueID)
+  const qurbanEventId = useSelector(getQurbanEventId)
 
   const emptyData = useMemo(() => ([{
     id: null,
@@ -56,15 +56,15 @@ const TableAdminQurbanRegistrationBase = <
             {/**
              * @todo add link to qurban registration if the page is ready
              */}
-            {/* <div
+            <div
               className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`}>
+              <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`} legacyBehavior>
                 <a
                   className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                   Manage
                 </a>
               </Link>
-            </div> */}
+            </div>
           </div>
         </div>
         <div className="block w-full overflow-x-auto">

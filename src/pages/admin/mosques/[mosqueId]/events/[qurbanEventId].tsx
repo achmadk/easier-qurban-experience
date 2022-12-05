@@ -83,7 +83,7 @@ export default function AdminMosqueEventID<
             <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
               <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
-                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/qurban_registrations`}>
+                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/qurban_registrations`} legacyBehavior>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -110,7 +110,7 @@ export default function AdminMosqueEventID<
                       </div>
                     </div>
                   </Link>
-                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/citizens`}>
+                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/citizens`} legacyBehavior>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -137,7 +137,7 @@ export default function AdminMosqueEventID<
                       </div>
                     </div>
                   </Link>
-                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/committees`}>
+                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/committees`} legacyBehavior>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -169,6 +169,10 @@ export default function AdminMosqueEventID<
             </div>
             <div className="px-4 md:px-10 mx-auto w-full -m-24">
               <div className="flex flex-wrap mt-4">
+                {/**
+                  * @todo uncomment those codes in order to provide link
+                  * to qurban registration page when ready
+                  */}
                 <TableAdminQurbanRegistration data={qurbanRegistrationData} />
                 <TableAdminQurbanCitizens data={qurbanCitizenData} />
                 <TableAdminQurbanCommittees data={qurbanCommitteesData} />
