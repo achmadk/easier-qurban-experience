@@ -140,7 +140,7 @@ export default function AdminMosqueIDCitizens<
                         </div>
                       </div>
                     </div>
-                    <Link href={`/assets/doc/add-batch-citizens.xlsx`}>
+                    <Link href={`/assets/doc/add-batch-citizens.xlsx`} legacyBehavior>
                       <a className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                         <div
                           className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">

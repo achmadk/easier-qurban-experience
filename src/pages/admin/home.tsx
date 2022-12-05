@@ -187,7 +187,7 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
               return (
                 <Link
                   key={`mosque-item-${index}`}
-                  href={`/admin/mosques/${item.id}`}>
+                  href={`/admin/mosques/${item.id}`} legacyBehavior>
                   <a className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center cursor-pointer" onClick={handleMosqueCardClicked(item)}>
                     <div
                       className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">

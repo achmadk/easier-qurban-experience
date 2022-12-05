@@ -5,8 +5,8 @@ import { useUser } from '@clerk/nextjs'
 import { createPopper } from '@popperjs/core'
 
 import Link from 'next/link'
-// import Image from 'next/image'
-import Image from 'next/future/image'
+import Image from 'next/image'
+// import Image from 'next/future/image'
 
 import { addRefProps, PropsWithInnerRef } from "utils"
 import { getMosqueID } from "state-management"
@@ -64,7 +64,7 @@ const SidebarAdminBase = <
             onClick={toggleNavbar}>
             <i className="fas fa-bars" />
           </button>
-          <Link href={`/admin/mosques/${mosqueId}`}>
+          <Link href={`/admin/mosques/${mosqueId}`} legacyBehavior>
             <a
               className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
               EQExp App
@@ -110,7 +110,8 @@ const SidebarAdminBase = <
                 <div className="w-6/12">
                   <Link
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    href={`/admin/mosques/${mosqueId}`}>
+                    href={`/admin/mosques/${mosqueId}`}
+                    legacyBehavior>
                     EQExp App
                   </Link>
                 </div>

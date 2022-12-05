@@ -23,8 +23,15 @@
     "emitDecoratorMetadata": true,
     "baseUrl": "./src/",
     "paths": {
-      "@/utils/*": ["/utils/*"]
-    }
+      "@/utils/*": [
+        "/utils/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "exclude": [
     "node_modules"
@@ -32,6 +39,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ]
 }

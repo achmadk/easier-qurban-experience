@@ -13,9 +13,10 @@ const isProduction = process.env.NODE_ENV === 'production'
 const isNextExportCommand = process.env.NEXT_EXPORT_COMMAND === 'true'
 
 const nextConfigurations = {
-  // experimental: {
-  //   fallbackNodePolyfills: false,
-  // },
+  experimental: {
+    appDir: true,
+    // fallbackNodePolyfills: false,
+  },
   images: {
     domains: ['www.floatui.com', 'images.clerk.dev'],
     ...(isNextExportCommand ? {
