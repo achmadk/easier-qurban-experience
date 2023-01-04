@@ -1,6 +1,5 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
@@ -68,6 +67,8 @@ model UserRole {
   @@unique([id, userId, roleId])
 
   @@map("user_role")
+  @@index([userId])
+  @@index([roleId])
 }
 
 model Mosque {
@@ -100,6 +101,8 @@ model MosqueUser {
   version   Int       @default(0)
 
   @@map("mosque_user")
+  @@index([mosqueId])
+  @@index([userId])
 }
 
 model QurbanEvents {
@@ -138,6 +141,8 @@ model MosqueQurbanEvent {
   @@unique([id])
 
   @@map("mosque_qurban_event")
+  @@index([mosqueId])
+  @@index([qurbanEventId])
 }
 
 model QurbanEventCommitee {
@@ -157,6 +162,9 @@ model QurbanEventCommitee {
   @@unique([id])
 
   @@map("qurban_event_committee")
+  @@index([qurbanEventId])
+  @@index([userId])
+  @@index([roleId])
 }
 
 model QurbanEventCitizen {
@@ -174,6 +182,8 @@ model QurbanEventCitizen {
   @@unique([id])
 
   @@map("qurban_event_citizen")
+  @@index([userId])
+  @@index([qurbanEventId])
 }
 
 model SacrificialAnimals {
@@ -213,6 +223,8 @@ model QurbanRegistration {
   @@unique([id])
 
   @@map("qurban_registration")
+  @@index([qurbanEventId])
+  @@index([sacrificialAnimalId])
 }
 
 model QurbanRegistrationParticipant {
@@ -230,6 +242,8 @@ model QurbanRegistrationParticipant {
   @@unique([id])
 
   @@map("qurban_registration_participant")
+  @@index([qurbanRegistrationId])
+  @@index([userId])
 }
 
 model QurbanRegistrationStatus {
@@ -246,6 +260,7 @@ model QurbanRegistrationStatus {
   @@unique([id])
 
   @@map("qurban_registration_status")
+  @@index([qurbanRegistrationId])
 }
 
 enum QurbanRegistrationStates {
