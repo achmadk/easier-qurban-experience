@@ -1,14 +1,14 @@
 # Easier Qurban Experience (`EQExp`)
 
 # Table of Contents
-1. [Descriptions](#descriptions)
-2. [Tech Stacks](#tech-stacks)
+1. [Descriptions](#1-descriptions)
+2. [Tech Stacks](#2-tech-stacks)
 3. [Prerequisites](#3-prerequisites)
     - [Softwares](#a-softwares)
     - [Environment variables](#b-environment-variables)
 4. [Installations](#4-installations)
 5. [Contribution](#5-contribution)
-5. [License](#5-license)
+6. [License](#6-license)
 
 ## 1. Descriptions
 `EQExp` is abbreviated to `Easier Qurban Experience` a web application that can help qurban committees and citizens track the qurban process. You can learn more about this web app through the article series [here](https://blogs.achmadk.dev/series/hackathon-intl-july-2022).  
