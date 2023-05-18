@@ -18,7 +18,8 @@ import 'utils/integration/third-parties/font-awesome'
 import './_app.css'
 
 const publicRoutes = [
-  '/'
+  '/',
+  '/.well-known/assetlinks.json'
 ]
 
 function MyApp({ Component, ...rest }: AppProps) {
