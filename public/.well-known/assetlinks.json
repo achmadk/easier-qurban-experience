@@ -1,0 +1,10 @@
+[{
+ "relation": ["delegate_permission/common.handle_all_urls"],
+ "target": {
+   "namespace": "android_app",
+   "package_name": "app.vercel.easier_qurban_experience.twa",
+   "sha256_cert_fingerprints": [
+     "1B:C8:56:31:16:9B:02:C9:00:95:AE:67:E0:C8:74:78:7E:23:AF:0B:AC:C2:11:12:54:4C:F9:52:0B:64:62:E2"
+   ]
+ }
+}]
