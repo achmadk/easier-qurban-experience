@@ -7,6 +7,7 @@ import { Provider as ReactReduxProvider } from 'react-redux'
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs'
 import { ToastContainer } from 'react-toastify'
 import { ContainerProvider } from 'inversify-hooks-esm'
+import { Analytics } from '@vercel/analytics/react'
 
 import { bindDependencyInjectionMethods } from 'dependency-injection'
 
@@ -43,7 +44,10 @@ function MyApp({ Component, ...rest }: AppProps) {
         />
         <ClerkProvider frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API} {...props.pageProps}>
           {isPublicPage ? (
-            <Component {...props.pageProps} />
+            <>
+              <Component {...props.pageProps} />
+              <Analytics />
+            </>
           ) : (
             <>
               <SignedIn>
