@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticPaths } from 'next'
 import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
@@ -38,7 +38,7 @@ export default function AdminMosqueIDCitizens<
 
   const { data: citizenData, getData: getCitizenData } =
     useControllerCitizenAdminFindGetResourceDataClient<CitizenWithIDType>()
-  
+
   const { getData: getMosqueData } =
     useControllerMosqueAdminFindGetDataClient()
 
@@ -190,7 +190,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: props }) => {
+export const getStaticProps = async ({ params: props }) => {
   return {
     props
   }

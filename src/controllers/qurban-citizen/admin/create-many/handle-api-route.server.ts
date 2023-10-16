@@ -20,9 +20,9 @@ export function getControllerQurbanCitizenAdminCreateManyHandleAPIRouteServer<
   const { transformRequestBody } = getControllerCoreDecryptionTransformRequestBodyServer<BodyType>()
   const { getData: getSavedCitizens }
     = getControllerCitizenAdminFindGetResourceData()
-    
+
   const handleAPIRoute = async (req: NextApiRequest, res: NextApiResponse) => {
-    
+
     const prisma = new PrismaClient()
     try {
       const { data } = req.body as { data: string }
@@ -33,18 +33,18 @@ export function getControllerQurbanCitizenAdminCreateManyHandleAPIRouteServer<
         }
       })
       let savedCitizens
-      if (type === 'CREATE_MANY_FROM_FILE') {
+      if (type === 'CREATE_MANY_FROM_FILE' && Array.isArray(citizens)) {
         savedCitizens = await prisma.$transaction(
           citizens.map((data) => prisma.user.create({ data }))
         )
         await prisma.userRole.createMany({
           data: savedCitizens.map((user) => ({
             userId: user.id,
-            roleId: citizenRole.id
+            roleId: citizenRole?.id
           }))
         })
       } else {
-        savedCitizens = await getSavedCitizens(mosqueId)
+        savedCitizens = await getSavedCitizens(mosqueId!)
       }
       await prisma.qurbanEventCitizen.createMany({
         data: savedCitizens.map((user) => ({

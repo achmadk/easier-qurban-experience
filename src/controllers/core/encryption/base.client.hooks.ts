@@ -17,7 +17,7 @@ export function useControllerCoreEncryptionTransformRequestBodyBaseClient<
         ...initialInput,
         timestamp: Date.now()
       }
-      return await api.encryptMessage(input)
+      return await api.encryptMessage(input) as string
     } finally {
       worker.terminate()
     }

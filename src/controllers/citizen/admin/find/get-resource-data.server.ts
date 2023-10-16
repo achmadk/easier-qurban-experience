@@ -28,7 +28,7 @@ export function getControllerCitizenAdminFindGetResourceData<
         },include: {
           user: true,
           role: true
-        } 
+        }
       })
       const citizenRole = await prisma.role.findFirst({
         where: {
@@ -37,7 +37,7 @@ export function getControllerCitizenAdminFindGetResourceData<
       })
       const savedCitizens = userRoles
         .filter((item) =>
-          item.role.id === citizenRole.id
+          item.role.id === citizenRole?.id
         ).map((item) => ({
           ...item.user,
           role: item.role,

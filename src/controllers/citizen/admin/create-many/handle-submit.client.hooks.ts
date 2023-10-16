@@ -57,7 +57,7 @@ export function useControllerCitizenAdminCreateManyHandleSubmitClient<
       remoteService.post(path, { data }),
       {
         pending: 'Loading add citizens...',
-        success: `Successfully ${type === 'CREATE_MANY_FROM_FILE' ? `add ${options.citizens.length} citizens.` : 'import data from mosque citizens.'}`,
+        success: `Successfully ${type === 'CREATE_MANY_FROM_FILE' ? `add ${options.citizens?.length} citizens.` : 'import data from mosque citizens.'}`,
         error: `Error adding citizens`
       }
     )

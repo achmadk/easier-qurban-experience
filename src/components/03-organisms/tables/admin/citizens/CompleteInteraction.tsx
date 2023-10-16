@@ -42,10 +42,10 @@ const TableAdminCitizensCompleteInteractionBase = <
       email: null,
       phoneNumber: null
     }
-  ]), [])
+  ] as unknown as IUserBase[]), [])
   const usedData = isAddBatch
     ? addedCitizens
-    : citizenData?.length > 0 ? citizenData : emptyData
+    : citizenData && citizenData?.length > 0 ? citizenData : emptyData
 
   const handleAddBatchButtonClicked = () =>
     setIsAddBatch(true)

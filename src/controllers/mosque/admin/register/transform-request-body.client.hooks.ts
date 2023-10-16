@@ -19,8 +19,8 @@ export function useControllerMosqueAdminRegisterTransformRequestBodyClient<
   const { user: clerkUser } = useUser()
   const transformRequestBody = (input: InputType): OutputType => {
     const user = {
-      name: clerkUser.fullName,
-      image: clerkUser.profileImageUrl,
+      name: clerkUser?.fullName,
+      image: clerkUser?.imageUrl,
       ...(clerkUser?.primaryEmailAddress?.emailAddress ? {
         email: clerkUser.primaryEmailAddress.emailAddress
       } : {}),

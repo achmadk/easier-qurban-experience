@@ -30,9 +30,9 @@ const TableAdminQurbanEventBase = <
   const emptyData = useMemo(() => ([{
     id: null,
     yearExecution: null
-  }] as DataType[]), [])
+  }] as unknown as DataType[]), [])
 
-  const usedData = data?.length > 0 ? data : emptyData
+  const usedData = data && data?.length > 0 ? data : emptyData
 
   const handleTableItemClicked = (data: DataType) => () =>
     dispatch(setQurbanEventData(data))

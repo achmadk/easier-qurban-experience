@@ -41,8 +41,8 @@ const TableAdminQurbanCommitteesBase = <
       email: null,
       phoneNumber: null
     }
-  ] as DataType[]), [])
-  const usedData = committeeData?.length > 0 ? committeeData : emptyData
+  ] as unknown as DataType[]), [])
+  const usedData = committeeData && committeeData?.length > 0 ? committeeData : emptyData
 
   return (
     <div ref={innerRef} className="w-full xl:w-7/12 mb-12 xl:mb-0 px-4">
@@ -66,7 +66,7 @@ const TableAdminQurbanCommitteesBase = <
                 <a
                   className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                   Manage
-                </a>                
+                </a>
               </Link>
             </div> */}
           </div>

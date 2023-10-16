@@ -29,8 +29,8 @@ const TableAdminCitizensBase = <
       email: null,
       phoneNumber: null
     }
-  ]), [])
-  const usedData = citizenData?.length > 0 ? citizenData : emptyData
+  ] as unknown as IUserBase[]), [])
+  const usedData = citizenData && citizenData?.length > 0 ? citizenData : emptyData
 
   return (
     <div ref={innerRef} className="w-full xl:w-7/12 mb-12 xl:mb-0 px-4">
@@ -51,7 +51,7 @@ const TableAdminCitizensBase = <
                 <a
                   className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                   Manage
-                </a>                
+                </a>
               </Link>
             </div>
           </div>

@@ -9,7 +9,7 @@ export const CONTROLLER_MOSQUE_ADMIN_FIND_HANDLE_API_ROUTE_SERVER =
 export function getControllerCitizenAdminCreateManyHandleAPIRouteServer<
   BodyType extends DefaultCitizenAdminCreateManyRequestBody = DefaultCitizenAdminCreateManyRequestBody
 >(): IControllerCoreHandleAPIRoute {
-    
+
   const handleAPIRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     const { transformRequestBody } = getControllerCoreDecryptionTransformRequestBodyServer<BodyType>()
 
@@ -28,7 +28,7 @@ export function getControllerCitizenAdminCreateManyHandleAPIRouteServer<
       await prisma.userRole.createMany({
         data: savedCitizens.map((user) => ({
           userId: user.id,
-          roleId: citizenRole.id
+          roleId: citizenRole?.id ?? ''
         }))
       })
       await prisma.mosqueUser.createMany({

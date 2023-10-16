@@ -10,7 +10,7 @@ export const CONTROLLER_MOSQUE_ADMIN_FIND_HANDLE_API_ROUTE_SERVER =
 export function getControllerMosqueAdminFindHandleAPIRouteServer<
   BodyType extends DefaultMosqueFindTransformRequestBodyClient = DefaultMosqueFindTransformRequestBodyClient
 >(): IControllerCoreHandleAPIRoute {
-    
+
   const handleAPIRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     const { transformRequestBody } = getControllerMosqueAdminFindTransformRequestBodyServer<BodyType>()
 
@@ -29,6 +29,8 @@ export function getControllerMosqueAdminFindHandleAPIRouteServer<
       })
       let data = savedMosqueUserData.map((item) => item.mosque)
       if (mosqueId) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         data = [data?.find((item) => item.id === mosqueId)] ?? []
       }
       res.status(200).json({ data })

@@ -23,4 +23,4 @@ export interface IContextPageAdminQurbanRegistrationsBase<
   setSelectedQurbanRegistrationData: Dispatch<SetStateAction<QurbanRegistrationType | null>>
 }
 
-export const ContextPageQurbanRegistrations = createContext<IContextPageAdminQurbanRegistrationsBase>(null)
+export const ContextPageQurbanRegistrations = createContext<IContextPageAdminQurbanRegistrationsBase>(null as unknown as IContextPageAdminQurbanRegistrationsBase)

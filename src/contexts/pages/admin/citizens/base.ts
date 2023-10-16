@@ -14,4 +14,4 @@ export interface IContextPageAdminCitizensBase<
   citizenData: CitizenWithIDType[] | null
 }
 
-export const ContextPageAdminCitizens = createContext<IContextPageAdminCitizensBase>(null)
+export const ContextPageAdminCitizens = createContext<IContextPageAdminCitizensBase>(null as unknown as IContextPageAdminCitizensBase)

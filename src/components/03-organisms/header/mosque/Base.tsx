@@ -18,7 +18,7 @@ export interface HeaderMosqueBaseProps extends PropsWithInnerRef<HTMLElement> {
   /**
    * @default 'DASHBOARD'
    */
-  headerType?: 
+  headerType?:
     | 'DASHBOARD'
     | 'CITIZENS'
     | 'QURBAN_EVENTS'
@@ -30,7 +30,7 @@ export interface HeaderMosqueBaseProps extends PropsWithInnerRef<HTMLElement> {
 const HeaderMosqueBase = <
   PropType extends HeaderMosqueBaseProps = HeaderMosqueBaseProps
 >({ innerRef, headerType = 'DASHBOARD' }: PropType) => {
-  const { user } = useUser()
+  const { user: initialUser } = useUser()
   const mosqueId = useSelector(getMosqueID)
   const mosqueName = useSelector(getMosqueName)
   const qurbanEventYearExecution = useSelector(getQurbanEventYearExecution)
@@ -40,13 +40,16 @@ const HeaderMosqueBase = <
     CONTROLLER_USER_ADMIN_LOGOUT_BASE_CLIENT
   )
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user = initialUser as any
+
   const toggleDropdown = (id: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let element = event.target as any
     while (element.nodeName !== "A") {
         element = element.parentNode;
     }
-    const elById = document.getElementById(id)
+    const elById = document.getElementById(id)!
     createPopper(element, elById, {
         placement: "bottom-start",
     });
