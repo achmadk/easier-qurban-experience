@@ -7,6 +7,7 @@ import { Provider as ReactReduxProvider } from 'react-redux'
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs'
 import { ToastContainer } from 'react-toastify'
 import { ContainerProvider } from 'inversify-hooks-esm'
+import { Analytics } from '@vercel/analytics/react'
 
 import { bindDependencyInjectionMethods } from 'dependency-injection'
 
@@ -18,7 +19,8 @@ import 'utils/integration/third-parties/font-awesome'
 import './_app.css'
 
 const publicRoutes = [
-  '/'
+  '/',
+  '/.well-known/assetlinks.json'
 ]
 
 function MyApp({ Component, ...rest }: AppProps) {
@@ -40,9 +42,12 @@ function MyApp({ Component, ...rest }: AppProps) {
         <ToastContainer
           position="top-center"
         />
-        <ClerkProvider {...props.pageProps}>
+        <ClerkProvider frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API} {...props.pageProps}>
           {isPublicPage ? (
-            <Component {...props.pageProps} />
+            <>
+              <Component {...props.pageProps} />
+              <Analytics />
+            </>
           ) : (
             <>
               <SignedIn>

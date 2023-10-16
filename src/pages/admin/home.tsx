@@ -44,11 +44,11 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
   const { checkValidCondition: checkMosqueDataIsEmpty } =
     useControllerMosqueAdminFindCheckValidConditionIsEmpty<InputType>()
 
-  const isMosqueDataEmpty = checkMosqueDataIsEmpty(mosqueData)
+  const isMosqueDataEmpty = checkMosqueDataIsEmpty(mosqueData!)
 
   /* Function for opening/closing navbar on mobile */
   const toggleNavbar = (elementId: string) => {
-    const elementNode = document.getElementById(elementId)
+    const elementNode = document.getElementById(elementId)!
     elementNode.classList.toggle("hidden");
     elementNode.classList.toggle("block");
   }
@@ -71,7 +71,7 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
   }, [])
 
   useEffect(() => {
-    if (!isMosqueDataEmpty) {
+    if (!isMosqueDataEmpty && Array.isArray(mosqueData)) {
       mosqueData.map((item) => {
         router.prefetch(`/admin/mosques/${item.id}`)
         return item
@@ -183,11 +183,11 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
       <div className="container mx-auto px-4">
         {!loadingMosqueData && !isMosqueDataEmpty && (
           <div className="flex flex-wrap">
-            {mosqueData.map((item, index) => {
+            {mosqueData?.map((item, index) => {
               return (
                 <Link
                   key={`mosque-item-${index}`}
-                  href={`/admin/mosques/${item.id}`}>
+                  href={`/admin/mosques/${item.id}`} legacyBehavior>
                   <a className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center cursor-pointer" onClick={handleMosqueCardClicked(item)}>
                     <div
                       className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
@@ -205,7 +205,7 @@ export default function AdminHome<InputType extends IMosqueWithID = IMosqueWithI
                   </a>
                 </Link>
               )
-            })}
+            }) ?? false}
           </div>
         )}
         {!loadingMosqueData && isMosqueDataEmpty && (

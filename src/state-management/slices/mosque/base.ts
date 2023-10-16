@@ -11,6 +11,10 @@ export interface DefaultReduxSliceMosqueBaseState<
   data: null | (DataType & { qurbanEvent?: null | QurbanEventType })
 }
 
+export type DefaultSetQurbanEventDataPayload<
+  QurbanEventType extends IModelQurbanEventWithID = IModelQurbanEventWithID
+> = QurbanEventType | null
+
 const name = 'mosque'
 
 const hydrate = createAction<{ mosque: DefaultReduxSliceMosqueBaseState }>(HYDRATE)
@@ -19,7 +23,7 @@ export const setMosqueData = createAction<DefaultReduxSliceMosqueBaseState['data
   `${name}/setMosqueData`
 )
 
-export const setQurbanEventData = createAction<DefaultReduxSliceMosqueBaseState['data']['qurbanEvent']>(
+export const setQurbanEventData = createAction<DefaultSetQurbanEventDataPayload>(
   `${name}/setQurbanEventData`
 )
 

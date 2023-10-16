@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticPaths } from 'next'
 import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
@@ -29,7 +29,7 @@ export default function AdminMosqueID<
   const [triggerLoadData, setTriggerLoadData] = useState(false)
   const { checkValidCondition: checkParamsIsReady } =
     useControllerCoreRouterIsParamsReady<PropType>()
-  
+
   const { data: citizenData, getData: getCitizenData } =
     useControllerCitizenAdminFindGetResourceDataClient()
   const { getData: getMosqueData } =
@@ -52,7 +52,7 @@ export default function AdminMosqueID<
       setTriggerLoadData(true)
     }
   }, [props?.mosqueId])
-  
+
   useEffect(() => {
     if (triggerLoadData) {
       // getMosqueData({ mosqueId: props.mosqueId })
@@ -79,7 +79,7 @@ export default function AdminMosqueID<
             <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
               <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
-                  <Link href={`/admin/mosques/${props.mosqueId}/citizens`}>
+                  <Link href={`/admin/mosques/${props.mosqueId}/citizens`} legacyBehavior>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -106,7 +106,7 @@ export default function AdminMosqueID<
                       </div>
                     </div>
                   </Link>
-                  <Link href={`/admin/mosques/${props.mosqueId}/events`}>
+                  <Link href={`/admin/mosques/${props.mosqueId}/events`} legacyBehavior>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -158,7 +158,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: props }) => {
+export const getStaticProps = async ({ params: props }) => {
   return {
     props
   }

@@ -1,17 +1,26 @@
-import { createContext } from "react"
+import { createContext, Dispatch, SetStateAction } from "react"
 
-import { IModelQurbanRegistrationWithID, IModelSacrificialAnimalWithId, IUserWithID } from "models"
+import { IModelQurbanRegistrationWithID, IModelSacrificialAnimalWithId, ICitizenWithID } from "models"
 
 export interface IContextPageAdminQurbanRegistrationsBase<
   QurbanRegistrationType extends IModelQurbanRegistrationWithID = IModelQurbanRegistrationWithID,
   SacrificialAnimalType extends IModelSacrificialAnimalWithId = IModelSacrificialAnimalWithId,
-  QurbanCitizenType extends IUserWithID = IUserWithID,
+  QurbanCitizenType extends ICitizenWithID = ICitizenWithID,
 > {
-  mode: 'CREATE' | 'VIEW'
-  toggleMode(mode?: 'CREATE' | 'VIEW'): void
+  mode: 'CREATE' | 'VIEW' | 'UPDATE'
+  /**
+   *
+   *
+   * @param {('CREATE' | 'VIEW' | 'UPDATE')} [mode] @default 'VIEW'
+   * @memberof IContextPageAdminQurbanRegistrationsBase
+   */
+  toggleMode(mode?: 'CREATE' | 'VIEW' | 'UPDATE'): void
   qurbanRegistrationsData?: QurbanRegistrationType[] | null
-  qurbanEventsData?: QurbanCitizenType[] | null
+  qurbanCitizensData?: QurbanCitizenType[] | null
   sacrificialAnimalsData?: SacrificialAnimalType[] | null
+  setTriggerLoadData: Dispatch<SetStateAction<boolean>>
+  selectedQurbanRegistrationData: QurbanRegistrationType | null
+  setSelectedQurbanRegistrationData: Dispatch<SetStateAction<QurbanRegistrationType | null>>
 }
 
-export const ContextPageQurbanRegistrations = createContext<IContextPageAdminQurbanRegistrationsBase>(null)
+export const ContextPageQurbanRegistrations = createContext<IContextPageAdminQurbanRegistrationsBase>(null as unknown as IContextPageAdminQurbanRegistrationsBase)

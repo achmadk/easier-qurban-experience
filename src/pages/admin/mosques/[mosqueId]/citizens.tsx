@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticPaths } from 'next'
 import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
@@ -38,7 +38,7 @@ export default function AdminMosqueIDCitizens<
 
   const { data: citizenData, getData: getCitizenData } =
     useControllerCitizenAdminFindGetResourceDataClient<CitizenWithIDType>()
-  
+
   const { getData: getMosqueData } =
     useControllerMosqueAdminFindGetDataClient()
 
@@ -140,7 +140,7 @@ export default function AdminMosqueIDCitizens<
                         </div>
                       </div>
                     </div>
-                    <Link href={`/assets/doc/add-batch-citizens.xlsx`}>
+                    <Link href={`/assets/doc/add-batch-citizens.xlsx`} legacyBehavior>
                       <a className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer">
                         <div
                           className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -190,7 +190,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: props }) => {
+export const getStaticProps = async ({ params: props }) => {
   return {
     props
   }

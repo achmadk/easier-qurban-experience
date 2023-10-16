@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { type MouseEvent, useRef } from "react"
 import { useSelector } from "react-redux"
 import { useContainerGet } from 'inversify-hooks-esm'
@@ -5,8 +6,8 @@ import { useUser } from '@clerk/nextjs'
 import { createPopper } from '@popperjs/core'
 
 import Link from 'next/link'
-// import Image from 'next/image'
-import Image from 'next/future/image'
+import Image from 'next/image'
+// import Image from 'next/future/image'
 
 import { addRefProps, PropsWithInnerRef } from "utils"
 import { getMosqueID } from "state-management"
@@ -30,7 +31,7 @@ const SidebarAdminBase = <
   )
 
   const toggleNavbar = () => {
-    const el = collapseSidebarRef.current
+    const el = collapseSidebarRef.current!
     el.classList.toggle("hidden");
     el.classList.toggle("bg-white");
     el.classList.toggle("m-2");
@@ -44,7 +45,7 @@ const SidebarAdminBase = <
     while (element.nodeName !== "A") {
         element = element.parentNode;
     }
-    const elById = document.getElementById(id)
+    const elById = document.getElementById(id)!
     createPopper(element, elById, {
         placement: "bottom-start",
     });
@@ -64,7 +65,7 @@ const SidebarAdminBase = <
             onClick={toggleNavbar}>
             <i className="fas fa-bars" />
           </button>
-          <Link href={`/admin/mosques/${mosqueId}`}>
+          <Link href={`/admin/mosques/${mosqueId}`} legacyBehavior>
             <a
               className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
               EQExp App
@@ -79,13 +80,13 @@ const SidebarAdminBase = <
                 <div className="items-center flex">
                   <span
                     className="relative w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-                    <Image
+                    {user && <Image
                       alt={`${user.fullName} Profile Image URL`}
                       className="w-full rounded-full align-middle border-none shadow-lg"
-                      src={user.profileImageUrl}
+                      src={user.imageUrl}
                       width={48}
                       height={48}
-                    />
+                    />}
                   </span>
                 </div>
               </a>
@@ -101,6 +102,7 @@ const SidebarAdminBase = <
             </li>
           </ul>
           <div
+            /** @ts-ignore */
             ref={collapseSidebarRef}
             className="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden"
             id="collapse-sidebar">
@@ -110,7 +112,8 @@ const SidebarAdminBase = <
                 <div className="w-6/12">
                   <Link
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    href={`/admin/mosques/${mosqueId}`}>
+                    href={`/admin/mosques/${mosqueId}`}
+                    legacyBehavior>
                     EQExp App
                   </Link>
                 </div>

@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
-import { useContext, useState /*, useEffect */ } from 'react'
-// import { useContainerGet } from 'inversify-hooks-esm'
-import { object, string, array } from 'yup'
-// import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
+import { Formik, Form, FormikProps } from 'formik'
+import { useContext, useState, useEffect, ChangeEvent } from 'react'
+import { useContainerGet } from 'inversify-hooks-esm'
 
-// @ts-ignore
-// import { Datepicker } from 'flowbite-datepicker'
-import { Select /*, Label */ } from 'flowbite-react'
+import { Select } from 'flowbite-react'
 
 import { ContextPageQurbanRegistrations } from 'contexts'
 
 import { addRefProps, PropsWithInnerRef } from "utils"
-// import {
-//   IControllerCoreHandleSubmit,
-//   CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
-// } from 'controllers'
+import {
+  IControllerCoreHandleSubmit,
+  CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_OR_UPDATE_GET_INITIAL_VALUE_CLIENT,
+  IControllerCoreGetInitialValue,
+  CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_OR_UPDATE_GET_VALIDATOR_CLIENT,
+  IControllerCoreGetValidator,
+  CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_OR_UPDATE_HANDLE_SUBMIT_CLIENT,
+  IControllerCoreGetLabelAction,
+  CONTROLLER_CORE_LABEL_ACTION_BASE_CLIENT
+} from 'controllers'
 
-import { /* IModelQurbanEventWithID, */ IModelQurbanRegistrationRequestBody, IModelSacrificialAnimalWithId } from "models"
-import { getQurbanEventId } from 'state-management'
+import { IModelQurbanRegistrationRequestBody, IModelSacrificialAnimalWithId } from "models"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ComponentOrganismFormQurbanRegistrationAddBaseProps
@@ -28,81 +28,72 @@ export interface ComponentOrganismFormQurbanRegistrationAddBaseProps
 export const ComponentOrganismFormQurbanRegistrationAddBase = <
   InputType extends IModelQurbanRegistrationRequestBody = IModelQurbanRegistrationRequestBody,
   PropType extends ComponentOrganismFormQurbanRegistrationAddBaseProps = ComponentOrganismFormQurbanRegistrationAddBaseProps,
-  // OutputType extends IModelQurbanEventWithID = IModelQurbanEventWithID,
   SacrificialAnimalType extends IModelSacrificialAnimalWithId = IModelSacrificialAnimalWithId
 >({ innerRef }: PropType) => {
-  const { toggleMode, sacrificialAnimalsData } = useContext(ContextPageQurbanRegistrations)
-  const qurbanEventId = useSelector(getQurbanEventId)
-  // const router = useRouter()
-  // const qurbanRegistrationAddCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType, OutputType>>(
-  //   CONTROLLER_QURBAN_EVENT_ADMIN_ADD_HANDLE_SUBMIT_CLIENT
-  // )
+  const {
+    mode,
+    toggleMode,
+    sacrificialAnimalsData,
+    qurbanCitizensData,
+  } = useContext(ContextPageQurbanRegistrations)
+
+  const qurbanRegistrationHandleSubmitCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType>>(
+    CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_OR_UPDATE_HANDLE_SUBMIT_CLIENT
+  )
+  const qurbanRegistrationInitialValueCtrl = useContainerGet<IControllerCoreGetInitialValue<InputType>>(
+    CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_OR_UPDATE_GET_INITIAL_VALUE_CLIENT
+  )
+  const qurbanRegistrationValidatorCtrl = useContainerGet<IControllerCoreGetValidator>(
+    CONTROLLER_QURBAN_REGISTRATION_ADMIN_ADD_OR_UPDATE_GET_VALIDATOR_CLIENT
+  )
+  const labelActionCtrl = useContainerGet<IControllerCoreGetLabelAction>(
+    CONTROLLER_CORE_LABEL_ACTION_BASE_CLIENT
+  )
   const [selectedSacrificialAnimal, setSelectedSacrificialAnimal] = useState<SacrificialAnimalType | null>(null)
-  // const [triggerUpdateMaxParticipants, setTriggerUpdateMaxParticipants] = useState(false)
-  const initialValue: InputType = {
-    sacrificialAnimalId: sacrificialAnimalsData?.[0]?.id ?? null,
-    qurbanEventId,
-    participantIds: []
-  } as InputType
+  const initialValue = qurbanRegistrationInitialValueCtrl.getInitialValue()
+  const labelAction = labelActionCtrl.getComputedResource(mode)
 
-  const validationSchema = object({
-    sacrificialAnimalId: string().required().defined(),
-    qurbanEventId: string().required().defined(),
-    participantIds: array().of(string()).required().defined()
-  })
-    .required()
-    .defined()
+  const validationSchema = qurbanRegistrationValidatorCtrl.getValidator()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleSubmit = async (input: InputType, helpers: FormikHelpers<InputType>) => {
-    try {
-      console.log(input)
-      // const result = await qurbanRegistrationAddCtrl.handleSubmit(input, helpers)
-      // router.push(`/admin/mosques/${result.mosqueId}/events/${result.id}`)
-    } finally {
-      toggleMode('VIEW')
+
+  useEffect(() => {
+    if (selectedSacrificialAnimal === null && initialValue.sacrificialAnimalId !== null) {
+      const newSelectedSacrificialAnimal = (sacrificialAnimalsData as SacrificialAnimalType[])
+        ?.find((item) => item.id === initialValue.sacrificialAnimalId) ?? null
+      setSelectedSacrificialAnimal(newSelectedSacrificialAnimal)
     }
-  }
-
-  // useEffect(() => {
-  //   let datepicker = null
-  //   if (mode === 'CREATE') {
-  //     datepicker = new Datepicker(dateExecutionRef.current)
-  //   }
-  //   return () =>
-  //     datepicker.destroy()
-  // }, [mode])
-
-  // console.log('datepicker: ', Datepicker)
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialValue.sacrificialAnimalId, selectedSacrificialAnimal])
 
   return (
-    <Formik enableReinitialize initialValues={initialValue} onSubmit={handleSubmit} validationSchema={validationSchema}>
-      {({ isSubmitting, dirty, isValid, handleChange, values }: FormikProps<InputType>) => {
+    <Formik
+      enableReinitialize
+      initialValues={initialValue}
+      onSubmit={qurbanRegistrationHandleSubmitCtrl.handleSubmit}
+      validationSchema={validationSchema}>
+      {({ isSubmitting, dirty, isValid, handleChange, values, setFieldValue }: FormikProps<InputType>) => {
+        const handleParticipantIdsChange = (index: number) => (event: ChangeEvent<HTMLSelectElement>) => {
+          const { value } = event.target
+          const newParticipantIdsValue = [...values.participantIds.slice(0, index), value, ...values.participantIds.slice(index + 1)]
+          setFieldValue('participantIds', newParticipantIdsValue)
+        }
         return (
           <Form ref={innerRef} className="w-full lg:w-6/12 px-4">
             <div
               className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white">
               <div className="flex-auto p-5 lg:p-10">
-              <h4 className="text-2xl font-semibold">Add Qurban Registration</h4>
+              <h4 className="text-2xl font-semibold">{`${labelAction} Qurban Registration`}</h4>
               <div className="relative w-full mb-3 mt-8">
                 <label
                   className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlFor="sacrificialAnimalId">
                   Sacrificial Animal
                 </label>
-                {/* <input
-                  name="yearExecution"
-                  type="number"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Insert qurban event year execution here"
-                  disabled={isSubmitting}
-                  onChange={handleChange}
-                  value={values.yearExecution}
-                /> */}
                 <Select
                   id="sacrificialAnimalId"
                   name="sacrificialAnimalId"
+                  disabled={isSubmitting}
+                  value={values.sacrificialAnimalId}
                   onChange={(event) => {
                     const id = event.target.value
                     handleChange(event)
@@ -111,34 +102,49 @@ export const ComponentOrganismFormQurbanRegistrationAddBase = <
                     setSelectedSacrificialAnimal(selectedSacrificialAnimal)
                   }}>
                   {sacrificialAnimalsData?.map((item, index) => (
-                    <option defaultChecked={index === 0} selected={values.sacrificialAnimalId === item.id} value={item.id} key={`sacrificial-animal-item-${index}`} className="flex items-center gap-4">
+                    <option
+                      key={`sacrificial-animal-item-${index}`}
+                      className="flex items-center gap-4"
+                      value={item.id}
+                      {...(mode === 'CREATE' ? { defaultChecked: index === 0 } : {})}
+                    >
                       {item.name}
                     </option>
                   )) ?? false}
                 </Select>
               </div>
               {selectedSacrificialAnimal?.maximalUser
-                && selectedSacrificialAnimal?.maximalUser > 0
-                && Array.from({ length: selectedSacrificialAnimal?.maximalUser }, (_v, i) => i)
+                && selectedSacrificialAnimal.maximalUser > 0
+                && Array.from({ length: selectedSacrificialAnimal.maximalUser }, (_v, i) => i)
                 .map((index) => (
                   <div key={`participant-id-${index}`} className="relative w-full mb-3 mt-8">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="participantIds">
+                      htmlFor={`participantIds[${index}]`}>
                       {`Participant #${index + 1}`}
                     </label>
                     <div className="relative">
                       <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path></svg>
+                        <i className="fas fa-user text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
                       </div>
-                      <input
-                        id="participantIds"
-                        name="participantIds"
-                        type="text"
-                        className="pl-10 p-2.5 border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Select date"
+                      <Select
+                        id={`participantIds[${index}]`}
+                        name={`participantIds[${index}]`}
+                        placeholder={`Select Participant #${index + 1}`}
                         disabled={isSubmitting}
-                        onChange={handleChange} />
+                        value={values.participantIds[index]}
+                        onChange={handleParticipantIdsChange(index)}>
+                        {qurbanCitizensData?.map((item, citizenIndex) => (
+                          <option
+                            key={`participant-item-${citizenIndex}`}
+                            className="flex items-center gap-4"
+                            value={item.id}
+                            {...(mode === 'CREATE' ? { defaultChecked: false } : {})}
+                          >
+                            {`${item.name} - ${item.phoneNumber}`}
+                          </option>
+                        )) ?? false}
+                      </Select>
                     </div>
                   </div>
                 ))}
@@ -154,7 +160,7 @@ export const ComponentOrganismFormQurbanRegistrationAddBase = <
                     className="bg-blue-700 text-white active:bg-blue-700 disabled:bg-light-600 disabled:text-blue-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="submit"
                     disabled={!dirty || !isValid || isSubmitting}>
-                    Add
+                    {labelAction}
                   </button>
                 </div>
               </div>

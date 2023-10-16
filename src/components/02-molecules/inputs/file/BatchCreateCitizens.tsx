@@ -27,11 +27,11 @@ const InputFileBatchCreateCitizensBase = <
     const app = wrap(worker) as unknown as IReadExcelFileWorkerType<ICitizenBase[]>
     try {
       const initialResult = await app.getDataFromFile(acceptedFiles[0])
-      const citizens = initialResult.map((item) => ({
+      const citizens = initialResult?.map((item) => ({
         ...item,
-        phoneNumber: item?.phoneNumber ? item.phoneNumber.toString() : null,
+        phoneNumber: item?.phoneNumber ? item.phoneNumber.toString() : '',
         name: item?.name ?? null
-      }))
+      })) ?? [] as ICitizenBase[]
       if (citizens.every((item) => item?.name && typeof name === 'string')) {
         setAddedCitizens((prevValue) => uniqBy([ ...prevValue, ...citizens], 'name'))
         toast.success(`Successfully read ${citizens.length} citizen data from file`)

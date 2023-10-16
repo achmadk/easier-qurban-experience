@@ -20,7 +20,7 @@ export const ComponentOrganismFormMosqueRegistrationBase = <
   OutputType extends IMosqueWithID = IMosqueWithID,
   PropType extends ComponentOrganismFormMosqueRegistrationBaseProps<OutputType> = ComponentOrganismFormMosqueRegistrationBaseProps<OutputType>
 >({ innerRef, onAfterSubmit }: PropType) => {
-  const mosqueRegisterCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType, OutputType | null>>(
+  const mosqueRegisterCtrl = useContainerGet<IControllerCoreHandleSubmit<InputType, OutputType>>(
     CONTROLLER_MOSQUE_ADMIN_REGISTER_HANDLE_SUBMIT_CLIENT
   )
   const initialValue: InputType = {
@@ -91,7 +91,7 @@ export const ComponentOrganismFormMosqueRegistrationBase = <
               </div>
             </div>
           </Form>
-        )}  
+        )}
       </Formik>
     </div>
   )

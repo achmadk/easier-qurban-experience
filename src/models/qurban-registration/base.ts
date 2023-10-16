@@ -17,6 +17,7 @@ export interface IModelQurbanRegistrationRequestBody<
   ParticipantType extends IUserWithID = IUserWithID,
   SacrificialAnimalType extends IModelSacrificialAnimalWithId = IModelSacrificialAnimalWithId
 > {
+  id: string | null
   qurbanEventId: string
   sacrificialAnimalId: SacrificialAnimalType['id']
   participantIds: ParticipantType['id'][]

@@ -30,9 +30,9 @@ const TableAdminQurbanEventBase = <
   const emptyData = useMemo(() => ([{
     id: null,
     yearExecution: null
-  }] as DataType[]), [])
+  }] as unknown as DataType[]), [])
 
-  const usedData = data?.length > 0 ? data : emptyData
+  const usedData = data && data?.length > 0 ? data : emptyData
 
   const handleTableItemClicked = (data: DataType) => () =>
     dispatch(setQurbanEventData(data))
@@ -51,7 +51,7 @@ const TableAdminQurbanEventBase = <
             </div>
             <div
               className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <Link href={`/admin/mosques/${mosqueId}/events`}>
+              <Link href={`/admin/mosques/${mosqueId}/events`} legacyBehavior>
               <a
                 className="bg-blue-600 text-white active:bg-blue-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                 Manage
@@ -77,7 +77,7 @@ const TableAdminQurbanEventBase = <
             </thead>
             <tbody>
               {usedData.map((data, index) => (
-                <Link key={`qurban-event-list-${index}`} href={`/admin/mosques/${data.mosqueId}/events/${data.id}`}>
+                <Link key={`qurban-event-list-${index}`} href={`/admin/mosques/${data.mosqueId}/events/${data.id}`} legacyBehavior>
                   <tr className="cursor-pointer hover:text-blue-600" onClick={handleTableItemClicked(data)}>
                     <th
                       className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">

@@ -1,13 +1,14 @@
 # Easier Qurban Experience (`EQExp`)
 
 # Table of Contents
-1. [Descriptions](#descriptions)
-2. [Tech Stacks](#tech-stacks)
+1. [Descriptions](#1-descriptions)
+2. [Tech Stacks](#2-tech-stacks)
 3. [Prerequisites](#3-prerequisites)
     - [Softwares](#a-softwares)
     - [Environment variables](#b-environment-variables)
 4. [Installations](#4-installations)
-5. [License](#5-license)
+5. [Contribution](#5-contribution)
+6. [License](#6-license)
 
 ## 1. Descriptions
 `EQExp` is abbreviated to `Easier Qurban Experience` a web application that can help qurban committees and citizens track the qurban process. You can learn more about this web app through the article series [here](https://blogs.achmadk.dev/series/hackathon-intl-july-2022).  
@@ -36,6 +37,7 @@ This web app initially use as my participation to [PlanetScale](https://planetsc
 2. Execute `yarn prisma migrate dev` to do a database migration.
 3. Execute `yarn prisma db seed` to do a database seeding.
 4. Execute `yarn next` to start development with a local server.
+
 ## 5. Contribution
 Contribution is welcome. Please read [CONTRIBUTING.md file](CONTRIBUTING.md) for more information.
 

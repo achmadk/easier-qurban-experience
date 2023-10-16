@@ -25,7 +25,7 @@ export function useControllerMosqueFindTransformRequestBodyClient<
   TransformedInputType extends DefaultMosqueFindTransformRequestBodyClient<InputType> = DefaultMosqueFindTransformRequestBodyClient<InputType>
 >(): IControllerCoreTransformRequestBody<OptionsType | null | undefined, Promise<string>> {
   const { user: clerkUser } = useUser()
-  
+
   const transformRequestBody = async (options?: OptionsType) => {
     const mosqueId = options?.mosqueId ?? null
     const worker = new Worker(
@@ -36,13 +36,13 @@ export function useControllerMosqueFindTransformRequestBodyClient<
     try {
       const input: TransformedInputType = {
         user: {
-            name: clerkUser.fullName,
+            name: clerkUser?.fullName,
             email: clerkUser?.primaryEmailAddress?.emailAddress ?? '',
         },
         ...(mosqueId ? { mosqueId } : {}),
         timestamp: Date.now()
       } as TransformedInputType
-      return await api.encryptMessage(input)
+      return await api.encryptMessage(input) as string
     } finally {
       worker.terminate()
     }

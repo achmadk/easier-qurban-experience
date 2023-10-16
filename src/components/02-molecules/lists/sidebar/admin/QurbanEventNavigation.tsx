@@ -33,7 +33,7 @@ const ListSidebarAdminQurbanEventNavigationBase = <
         ref={innerRef}
         className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li className="items-center">
-          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}`}>
+          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}`} legacyBehavior>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]`)}>
               <i className="fas fa-tachograph-digital text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
@@ -42,7 +42,7 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           </Link>
         </li>
         <li className="items-center">
-          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`}>
+          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/citizens`} legacyBehavior>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/citizens`)}>
               <i className="fas fa-people-group text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
@@ -55,8 +55,8 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           * to qurban committees page when ready
           * <-- [START] -->
           */}
-        {/* <li className="items-center">
-          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`}>
+        <li className="items-center">
+          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`} legacyBehavior>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/qurban_registrations`)}>
               <i className="fab fa-wpforms text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
@@ -65,7 +65,7 @@ const ListSidebarAdminQurbanEventNavigationBase = <
           </Link>
         </li>
         <li className="items-center">
-          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/committees`}>
+          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/committees`} legacyBehavior>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/committees`)}>
               <i className="fas fa-people-line text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
@@ -73,8 +73,8 @@ const ListSidebarAdminQurbanEventNavigationBase = <
             </a>
           </Link>
         </li>
-        <li className="items-center">
-          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/reports`}>
+        {/* <li className="items-center">
+          <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/reports`} legacyBehavior>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/reports`)}>
               <i className="fas fa-chart-column text-blueGray-300 mr-2 text-sm" style={{ width: '1rem' }} />
