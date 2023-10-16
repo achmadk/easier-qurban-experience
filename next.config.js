@@ -14,7 +14,6 @@ const isNextExportCommand = process.env.NEXT_EXPORT_COMMAND === 'true'
 
 const nextConfigurations = {
   experimental: {
-    appDir: true,
     // fallbackNodePolyfills: false,
   },
   images: {
