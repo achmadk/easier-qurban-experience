@@ -18,9 +18,9 @@ const TableAdminQurbanRegistrationCompleteInteractionBase = <
   const emptyData = useMemo(() => ([{
     id: null,
     participants: []
-  }] as DataType[]), [])
+  }] as unknown as DataType[]), [])
 
-  const usedData = (qurbanRegistrationsData?.length > 0 ? qurbanRegistrationsData : emptyData) as DataType[]
+  const usedData = (qurbanRegistrationsData && qurbanRegistrationsData?.length > 0 ? qurbanRegistrationsData : emptyData) as DataType[]
 
   const handleButtonAddClicked = () =>
     toggleMode('CREATE')

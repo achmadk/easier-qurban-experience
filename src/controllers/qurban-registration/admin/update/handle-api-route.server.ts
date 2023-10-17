@@ -10,7 +10,7 @@ export const CONTROLLER_QURBAN_REGISTRATION_ADMIN_UPDATE_HANDLE_API_ROUTE_SERVER
 export function getControllerQurbanRegistrationAdminUpdateHandleAPIRouteServer<
   BodyType extends IModelQurbanRegistrationRequestBody = IModelQurbanRegistrationRequestBody
 >(): IControllerCoreHandleAPIRoute {
-    
+
   const handleAPIRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     const { transformRequestBody } = getControllerCoreDecryptionTransformRequestBodyServer<BodyType>()
 
@@ -20,7 +20,7 @@ export function getControllerQurbanRegistrationAdminUpdateHandleAPIRouteServer<
       const { id, qurbanEventId, sacrificialAnimalId, participantIds } = await transformRequestBody(data)
       const savedQurbanRegistration = await prisma.qurbanRegistration.update({
         where: {
-          id,
+          id: id!,
         },
         data: {
           qurbanEventId,
@@ -30,13 +30,13 @@ export function getControllerQurbanRegistrationAdminUpdateHandleAPIRouteServer<
       if (participantIds && Array.isArray(participantIds)) {
         await prisma.qurbanRegistrationParticipant.deleteMany({
           where: {
-            qurbanRegistrationId: id,
+            qurbanRegistrationId: id!,
           }
         })
         participantIds.map(async (participantId) => {
             return await prisma.qurbanRegistrationParticipant.create({
               data: {
-                qurbanRegistrationId: id,
+                qurbanRegistrationId: id!,
                 userId: participantId,
               }
             })

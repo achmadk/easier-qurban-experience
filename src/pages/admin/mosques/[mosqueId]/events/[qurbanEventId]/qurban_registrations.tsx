@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticPaths } from 'next'
 import { useState, useEffect } from 'react'
 
 import { HeaderMosque } from 'components/03-organisms/header/mosque/Base'
@@ -139,7 +139,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: props }) => {
+export const getStaticProps = async ({ params: props }) => {
   return {
     props
   }

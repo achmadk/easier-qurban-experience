@@ -4,15 +4,15 @@ import { IControllerCoreTransformRequestBody } from "controllers/core";
 
 export function getControllerCoreDecryptionTransformRequestBodyServer<
   OutputType = unknown
->(): IControllerCoreTransformRequestBody<string, Promise<OutputType | null>> {
-  const transformRequestBody = async (input: string): Promise<OutputType | null> => {
+>(): IControllerCoreTransformRequestBody<string, Promise<OutputType>> {
+  const transformRequestBody = async (input: string): Promise<OutputType> => {
     try {
-      return await decryptMessage<OutputType>(input)
+      return await decryptMessage<OutputType>(input) as OutputType
     } catch {
-      return null
+      return null as unknown as OutputType
     }
   }
-  
+
   return {
     transformRequestBody
   }

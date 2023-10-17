@@ -10,4 +10,4 @@ export interface IContextPageAdminQurbanEventsBase<
   qurbanEventsData?: QurbanEventType[] | null
 }
 
-export const ContextPageQurbanEvents = createContext<IContextPageAdminQurbanEventsBase>(null)
+export const ContextPageQurbanEvents = createContext<IContextPageAdminQurbanEventsBase>(null as unknown as IContextPageAdminQurbanEventsBase)

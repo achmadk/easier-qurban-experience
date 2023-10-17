@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticPaths } from 'next'
 import { useState, useEffect } from 'react'
 
 import { HeaderMosque } from 'components/03-organisms/header/mosque/Base'
@@ -38,7 +38,7 @@ export default function AdminMosqueIDQurbanEvents<
     await getQurbanEventsData({ mosqueId })
   }
 
-  const toggleMode = (value?: 'CREATE' | 'VIEW') => {
+  const toggleMode = (value: 'CREATE' | 'VIEW') => {
     setMode((prevValue) => ['CREATE', 'VIEW'].includes(value)
       ? value
       : prevValue === 'CREATE' ? 'VIEW' : 'CREATE'
@@ -100,7 +100,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: props }) => {
+export const getStaticProps = async ({ params: props }) => {
   return {
     props
   }

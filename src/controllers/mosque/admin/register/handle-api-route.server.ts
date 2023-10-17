@@ -35,7 +35,7 @@ export function getControllerMosqueAdminRegisterHandleAPIRouteServer<
       await prismaClient.userRole.create({
         data: {
           userId: newUserData.id,
-          roleId: adminRole.id
+          roleId: adminRole?.id ?? ''
         }
       })
       res.status(200).json({ data: newMosqueData })
