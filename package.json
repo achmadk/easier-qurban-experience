@@ -16,7 +16,7 @@
     "build": "next build",
     "start": "next start -p 8085",
     "export": "cross-env NEXT_EXPORT_COMMAND=true next export",
-    "postinstall": "husky install"
+    "postinstall": "husky install && prisma generate"
   },
   "prisma": {
     "seed": "ts-node --transpile-only --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
