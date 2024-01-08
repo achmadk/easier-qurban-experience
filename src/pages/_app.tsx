@@ -13,7 +13,7 @@ import { bindDependencyInjectionMethods } from 'dependency-injection'
 
 import { wrapper } from 'state-management/store'
 
-import 'windi.css'
+import 'styles/globals.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'utils/integration/third-parties/font-awesome'
 import './_app.css'
@@ -42,7 +42,7 @@ function MyApp({ Component, ...rest }: AppProps) {
         <ToastContainer
           position="top-center"
         />
-        <ClerkProvider frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API} {...props.pageProps}>
+        <ClerkProvider {...props.pageProps}>
           {isPublicPage ? (
             <>
               <Component {...props.pageProps} />

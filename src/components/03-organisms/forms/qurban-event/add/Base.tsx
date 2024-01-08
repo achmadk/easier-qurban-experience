@@ -1,9 +1,12 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik'
 import { useRef, useContext } from 'react'
 import { useContainerGet } from 'inversify-hooks-esm'
 import { object, string, number } from 'yup'
 import { useRouter } from 'next/router'
+import { Datepicker } from 'flowbite-react'
 // @ts-ignore
 // import { Datepicker } from 'flowbite-datepicker'
 
@@ -102,19 +105,18 @@ export const ComponentOrganismFormQurbanEventAddBase = <
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                   <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path></svg>
                 </div>
-                <input
+                <Datepicker
                   /** @ts-ignore */
                   ref={dateExecutionRef}
                   name="dateExecution"
-                  /** @ts-ignore */
-                  datepicker
+                  datepicker="true"
                   datepicker-buttons
+                  color="primary"
                   type="text"
                   className="pl-10 p-2.5 border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Select date"
                   disabled={isSubmitting}
-                  onChange={handleChange}
-                  value={values.dateExecution} />
+                  onChange={handleChange} />
               </div>
             </div>
             <div className="relative w-full mb-3">

@@ -50,11 +50,6 @@ const ListSidebarAdminQurbanEventNavigationBase = <
             </a>
           </Link>
         </li>
-        {/**
-          * @todo uncomment those codes in order to provide link
-          * to qurban committees page when ready
-          * <-- [START] -->
-          */}
         <li className="items-center">
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/qurban_registrations`} legacyBehavior>
             <a
@@ -64,7 +59,12 @@ const ListSidebarAdminQurbanEventNavigationBase = <
             </a>
           </Link>
         </li>
-        <li className="items-center">
+        {/**
+          * @todo uncomment those codes in order to provide link
+          * to qurban committees page when ready
+          * <-- [START] -->
+          */}
+        {/* <li className="items-center">
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/committees`} legacyBehavior>
             <a
               className={linkClassName(`/admin/mosques/[mosqueId]/events/[qurbanEventId]/committees`)}>
@@ -72,7 +72,8 @@ const ListSidebarAdminQurbanEventNavigationBase = <
               Committees
             </a>
           </Link>
-        </li>
+        </li> */}
+        {/** <-- [END] --> */}
         {/* <li className="items-center">
           <Link href={`/admin/mosques/${mosqueId}/events/${qurbanEventId}/reports`} legacyBehavior>
             <a
@@ -82,7 +83,6 @@ const ListSidebarAdminQurbanEventNavigationBase = <
             </a>
           </Link>
         </li> */}
-        {/** <-- [END] --> */}
       </ul>
     </>
   )
