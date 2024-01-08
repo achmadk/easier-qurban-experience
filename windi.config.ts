@@ -8,7 +8,7 @@ const config = defineConfig({
     include: [
       './src/components/**/*.{ts,tsx,js,jsx}', 
       './src/pages/**/*.{ts,tsx,js,jsx}',
-      'node_modules/flowbite-react/**/*.{ts,tsx,js,jsx}'
+      './node_modules/flowbite-react/lib/**/*.{ts,tsx,js,jsx}'
     ],
     exclude: ['node_modules', '.git', '.next'],
   },

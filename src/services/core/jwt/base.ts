@@ -1,4 +1,4 @@
-import { SignJWT, importJWK, jwtVerify, JWTPayload } from 'jose'
+import { SignJWT, jwtVerify, JWTPayload } from 'jose'
 
 export interface JWTWorkerType {
   encryptMessage<PayloadType = unknown>(
@@ -7,13 +7,11 @@ export interface JWTWorkerType {
   decryptMessage<SuccessReturnType = unknown>(input: string): Promise<SuccessReturnType | null>
 }
 
-async function getSecretKey(secret = process.env.NEXT_PUBLIC_JWT_SECRET_KEY as string) {
-  
-  const jwk = {
-    kty: 'oct',
-    k: secret,
-  }
-  return await importJWK(jwk, 'HS256')
+async function getSecretKey(secret = process.env.NEXT_PUBLIC_JWT_SECRET_KEY as string): Promise<Uint8Array> {
+  return new Promise((resolve) => {
+    const sample = new TextEncoder().encode(secret)
+    resolve(sample)
+  })
 }
 
 export async function encryptMessage<

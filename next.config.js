@@ -5,7 +5,7 @@ const glob = require('glob')
 const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 const optimizedImages = require('next-optimized-images')
-const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
+// const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const PurgeFontawesomePlugin = require('purge-fontawesome/webpack-plugin')
 
@@ -17,7 +17,7 @@ const nextConfigurations = {
     // fallbackNodePolyfills: false,
   },
   images: {
-    domains: ['www.floatui.com', 'images.clerk.dev'],
+    domains: ['www.floatui.com', 'images.clerk.dev', 'img.clerk.com'],
     ...(isNextExportCommand ? {
       loader: 'akamai',
       unoptimized: true,
@@ -32,9 +32,6 @@ const nextConfigurations = {
   webpack(config) {
     config.resolve.alias['@$'] = resolve(__dirname, 'src')
     config.resolve.alias['linaria/loader'] = '@linaria/webpack-loader'
-    config.plugins.push(
-      new WindiCSSWebpackPlugin()
-    )
     if (isProduction) {
       config.plugins.push(
         new CompressionWebpackPlugin({

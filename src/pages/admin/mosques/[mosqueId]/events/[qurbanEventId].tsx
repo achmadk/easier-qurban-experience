@@ -12,11 +12,11 @@ import { ListSidebarAdminQurbanEventNavigation } from 'components/02-molecules/l
 import { TableAdminQurbanCitizens } from 'components/03-organisms/tables/admin/qurban-citizens/Base'
 import { TableAdminQurbanRegistration } from 'components/03-organisms/tables/admin/qurban-registrations/Base'
 
-import { useControllerCoreRouterIsParamsReady, useControllerMosqueAdminFindGetDataClient, useControllerQurbanCitizenAdminFindGetResourceDataClient, useControllerQurbanCommitteeAdminGetResourceDataClient, useControllerQurbanEventAdminFindGetResourceDataClient, useControllerQurbanRegistrationAdminFindGetResourceDataClient } from 'controllers'
+import { useControllerCoreRouterIsParamsReady, useControllerMosqueAdminFindGetDataClient, useControllerQurbanCitizenAdminFindGetResourceDataClient, /* useControllerQurbanCommitteeAdminGetResourceDataClient, */ useControllerQurbanEventAdminFindGetResourceDataClient, useControllerQurbanRegistrationAdminFindGetResourceDataClient } from 'controllers'
 
 import { IRouteCoreMosqueBase, IRouteCoreMosqueEventBase } from 'routes'
 import { IModelQurbanEventWithID } from 'models'
-import { TableAdminQurbanCommittees } from 'components/03-organisms/tables/admin/qurban-committees/Base'
+// import { TableAdminQurbanCommittees } from 'components/03-organisms/tables/admin/qurban-committees/Base'
 
 export interface AdminMosqueEventIDProps
   extends IRouteCoreMosqueBase, IRouteCoreMosqueEventBase {}
@@ -35,8 +35,8 @@ export default function AdminMosqueEventID<
     useControllerQurbanEventAdminFindGetResourceDataClient<QurbanEventDataType>()
   const { data: qurbanCitizenData, getData: getQurbanCitizenData } =
     useControllerQurbanCitizenAdminFindGetResourceDataClient()
-  const { data: qurbanCommitteesData, getData: getQurbanCommitteesData } =
-    useControllerQurbanCommitteeAdminGetResourceDataClient()
+  // const { data: qurbanCommitteesData, getData: getQurbanCommitteesData } =
+  //   useControllerQurbanCommitteeAdminGetResourceDataClient()
   const { data: qurbanRegistrationData, getData: getQurbanRegistrationData } =
     useControllerQurbanRegistrationAdminFindGetResourceDataClient()
 
@@ -50,7 +50,7 @@ export default function AdminMosqueEventID<
     })
     await getQurbanRegistrationData(props.qurbanEventId)
     await getQurbanCitizenData(props.qurbanEventId)
-    await getQurbanCommitteesData(props.mosqueId)
+    // await getQurbanCommitteesData(props.mosqueId)
   }
 
   useEffect(() => {
@@ -137,7 +137,7 @@ export default function AdminMosqueEventID<
                       </div>
                     </div>
                   </Link>
-                  <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/committees`} legacyBehavior>
+                  {/* <Link href={`/admin/mosques/${props.mosqueId}/events/${props.qurbanEventId}/committees`} legacyBehavior>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                       <div
                         className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -163,7 +163,7 @@ export default function AdminMosqueEventID<
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -175,7 +175,7 @@ export default function AdminMosqueEventID<
                   */}
                 <TableAdminQurbanRegistration data={qurbanRegistrationData} />
                 <TableAdminQurbanCitizens data={qurbanCitizenData} />
-                <TableAdminQurbanCommittees data={qurbanCommitteesData} />
+                {/* <TableAdminQurbanCommittees data={qurbanCommitteesData} /> */}
               </div>
               <FooterAdmin />
             </div>

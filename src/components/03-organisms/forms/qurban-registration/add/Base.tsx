@@ -130,7 +130,7 @@ export const ComponentOrganismFormQurbanRegistrationAddBase = <
                       <Select
                         id={`participantIds[${index}]`}
                         name={`participantIds[${index}]`}
-                        placeholder={`Select Participant #${index + 1}`}
+                        helperText={`Select Participant #${index + 1}`}
                         disabled={isSubmitting}
                         value={values.participantIds[index]}
                         onChange={handleParticipantIdsChange(index)}>

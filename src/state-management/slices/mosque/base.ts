@@ -28,9 +28,9 @@ export const setQurbanEventData = createAction<DefaultSetQurbanEventDataPayload>
 )
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const reduxSliceMosqueBase = createSlice<DefaultReduxSliceMosqueBaseState, {}>({
+export const reduxSliceMosqueBase = createSlice({
   name,
-  initialState: { data: null },
+  initialState: { data: null } as DefaultReduxSliceMosqueBaseState,
   reducers: {},
   extraReducers: (builder) =>
     builder

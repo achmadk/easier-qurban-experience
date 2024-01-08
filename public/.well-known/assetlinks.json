@@ -4,7 +4,8 @@
    "namespace": "android_app",
    "package_name": "app.vercel.easier_qurban_experience.twa",
    "sha256_cert_fingerprints": [
-     "DF:50:52:2C:60:67:45:79:3D:94:51:EE:A1:14:FC:9C:C5:04:BF:28:E8:56:AA:C3:6C:5A:2F:37:A5:45:84:6C"
+     "DF:50:52:2C:60:67:45:79:3D:94:51:EE:A1:14:FC:9C:C5:04:BF:28:E8:56:AA:C3:6C:5A:2F:37:A5:45:84:6C",
+     "70:26:28:CF:BD:A4:FC:39:DF:85:CB:AB:C2:4A:33:24:28:5A:9A:CA:68:14:89:17:3F:F4:53:F5:51:7C:2F:81"
    ]
  }
 }]
