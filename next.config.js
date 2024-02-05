@@ -17,7 +17,17 @@ const nextConfigurations = {
     // fallbackNodePolyfills: false,
   },
   images: {
-    domains: ['www.floatui.com', 'images.clerk.dev', 'img.clerk.com'],
+    remotePatterns: [
+      {
+        hostname: 'floatui.com'
+      },
+      {
+        hostname: '**.clerk.dev'
+      },
+      {
+        hostname: '**.clerk.com'
+      }
+    ],
     ...(isNextExportCommand ? {
       loader: 'akamai',
       unoptimized: true,
