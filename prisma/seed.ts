@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-  const storedRoles = await prisma.role.findMany()
+  let storedRoles = await prisma.role.findMany()
   if (storedRoles.length === 0) {
     await prisma.role.createMany({
       data: [
@@ -35,6 +35,7 @@ async function main() {
       ]
     })
   }
+  storedRoles = await prisma.role.findMany()
   if (storedRoles.length === 5) {
     await prisma.role.create({
       data: {
