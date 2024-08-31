@@ -1,19 +1,16 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const flowbitePlugin = require('flowbite/plugin') 
+/**
+ * @import { Config } from 'tailwindcss'
+ */
+import { content as _content, plugin } from 'flowbite-react/tailwind'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/pages/**/*.{ts,tsx}",
-    "./src/components/**/*.{ts,tsx}",
-    "./public/**/*.html",
-    "./node_modules/flowbite-react/lib/esm/**/*.js",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    flowbitePlugin
-  ],
+/** @type {Config} */
+export const content = [
+  './src/pages/**/*.{ts,tsx}',
+  './src/components/**/*.{ts,tsx}',
+  './public/**/*.html',
+  _content()
+]
+export const theme = {
+  extend: {}
 }
-
+export const plugins = [plugin()]

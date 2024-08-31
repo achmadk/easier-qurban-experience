@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "WebWorker"
-    ],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext", "WebWorker", "ESNext.Disposable"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -23,9 +18,7 @@
     "emitDecoratorMetadata": true,
     "baseUrl": "./src/",
     "paths": {
-      "@/utils/*": [
-        "/utils/*"
-      ]
+      "@/utils/*": ["/utils/*"]
     },
     "plugins": [
       {
@@ -34,13 +27,6 @@
     ],
     "strictNullChecks": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }
